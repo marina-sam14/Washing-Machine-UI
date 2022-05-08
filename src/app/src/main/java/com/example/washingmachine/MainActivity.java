@@ -21,15 +21,20 @@ import com.example.washingmachine.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextClock;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -55,11 +60,31 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        //TextView date = (TextView)findViewById(R.id.date);
 
-//        String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
-//        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
-//        textView .setText("Time: " + dateFormat.format(currentDateTimeString));
+
+//        Calendar c = Calendar.getInstance();
+//        System.out.println("Current time => "+c.getTime());
+//
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        String formattedDate = df.format(c.getTime());
+//        // formattedDate have current date/time
+//        Toast.makeText(this, formattedDate, Toast.LENGTH_SHORT).show();
+//
+//        TextView txtView = new TextView(this);
+//        txtView.setText("Current Date and Time : "+formattedDate);
+//        txtView.setGravity(Gravity.START);
+//        txtView.setTextSize(20);
+//        setContentView(txtView);
+        TextView date = (TextView) findViewById(R.id.date);
+        Calendar  calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        String dateTime = simpleDateFormat.format(calendar.getTime()).toString();
+        date.setText(dateTime);
+
+        TextView tClock = (TextView) findViewById(R.id.clock);
+        String clock = tClock.getText().toString();
+        tClock.setText(clock);
+
     }
 
     @Override
