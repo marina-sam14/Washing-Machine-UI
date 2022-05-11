@@ -56,10 +56,10 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="245dp"
         android:layout_marginEnd="6dp"
+        android:format24Hour="hh:mm:ss"
         android:gravity="end"
         android:padding="20dp"
-        android:textSize="25sp"
-        android:format24Hour="hh:mm:ss"/>
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/date"
