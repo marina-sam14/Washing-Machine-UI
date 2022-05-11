@@ -45,24 +45,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button programs = (Button)findViewById(R.id.programs);
-        Button settings = (Button)findViewById(R.id.settings);
-
-        programs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,FirstFragment.class);
-                startActivity(intent);
-            }
-        });
-
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,Settings.class);
-                startActivity(intent);
-            }
-        });
+//        Button programs = (Button)findViewById(R.id.programs);
+//        Button settings = (Button)findViewById(R.id.settings);
+//
+//        programs.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this,FirstFragment.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        settings.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent2 = new Intent(MainActivity.this,Settings.class);
+//                startActivity(intent2);
+//            }
+//        });
 
 
 //        Calendar c = Calendar.getInstance();

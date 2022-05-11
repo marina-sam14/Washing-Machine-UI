@@ -11,56 +11,41 @@
 
     <Button
         android:id="@+id/programs"
-        android:layout_width="185dp"
-        android:layout_height="107dp"
+        android:layout_width="266dp"
+        android:layout_height="32dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="117dp"
-        android:layout_marginTop="172dp"
-        android:layout_marginEnd="108dp"
-        android:layout_marginBottom="452dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="171dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="187dp"
+        android:layout_marginBottom="392dp"
         android:backgroundTint="@color/white"
         android:text="@string/home1"
         android:textColor="#0C0C0C"
         android:textSize="16sp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/settings"
-        android:layout_width="193dp"
-        android:layout_height="wrap_content"
+        android:layout_width="273dp"
+        android:layout_height="36dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="113dp"
-        android:layout_marginTop="331dp"
-        android:layout_marginEnd="105dp"
-        android:layout_marginBottom="286dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="166dp"
+        android:layout_marginTop="351dp"
+        android:layout_marginEnd="187dp"
+        android:layout_marginBottom="89dp"
         android:backgroundTint="@color/white"
         android:text="@string/home2"
         android:textColor="#0C0C0C"
         android:textSize="16sp"
         android:textStyle="bold" />
-
-<!--        <EditText-->
-<!--        android:id="@+id/date"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentStart="true"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginStart="107dp"-->
-<!--        android:layout_marginTop="11dp"-->
-<!--        android:layout_marginEnd="94dp"-->
-<!--        android:ems="10"-->
-<!--        android:minHeight="48dp"-->
-<!--        android:text="" />-->
 
     <TextClock
         android:id="@+id/clock"
