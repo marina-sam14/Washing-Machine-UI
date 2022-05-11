@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".FirstFragment"></activity>
+        <activity android:name=".Settings"></activity>
     </application>
 
 </manifest>

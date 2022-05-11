@@ -21,7 +21,7 @@
         android:layout_marginEnd="9dp"
         android:layout_marginBottom="332dp"
         android:format24Hour="hh:mm:ss"
-        android:gravity="right"
+        android:gravity="end"
         android:padding="20dp"
         android:textSize="25sp" />
 
@@ -205,7 +205,8 @@
         android:spinnerMode="dropdown"
         android:text="@string/spinner"
         android:textAlignment="center"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
     <TextView
         android:id="@+id/textView6"
@@ -220,6 +221,7 @@
         android:layout_marginEnd="542dp"
         android:layout_marginBottom="367dp"
         android:text="@string/descr1"
+        android:textColor="#212121"
         android:textSize="14sp"
         android:textStyle="bold" />
 
@@ -237,6 +239,7 @@
         android:layout_marginEnd="311dp"
         android:layout_marginBottom="363dp"
         android:text="@string/spinner"
+        android:textColor="#212121"
         android:textSize="14sp"
         android:textStyle="bold" />
 
@@ -251,6 +254,7 @@
         android:layout_marginTop="45dp"
         android:layout_marginBottom="383dp"
         android:text="@string/descr2"
+        android:textColor="#212121"
         android:textSize="14sp"
         android:textStyle="bold" />
 
@@ -267,9 +271,10 @@
         android:layout_marginEnd="78dp"
         android:layout_marginBottom="18dp"
         android:backgroundTint="#217E8A"
+        android:contentDescription="TODO"
         app:srcCompat="@android:drawable/ic_menu_send"
         app:tint="#0EDD17"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
     <TextView
         android:id="@+id/next"
@@ -283,6 +288,7 @@
         android:layout_marginBottom="22dp"
         android:text="@string/next"
         android:textAlignment="center"
+        android:textColor="#212121"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -292,13 +298,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="53dp"
         android:layout_marginTop="409dp"
+        android:layout_marginEnd="712dp"
         android:layout_marginBottom="10dp"
         android:backgroundTint="#091D8C"
         app:srcCompat="@android:drawable/ic_menu_help"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck"
+        android:contentDescription="TODO" />
 
 
 </RelativeLayout>
