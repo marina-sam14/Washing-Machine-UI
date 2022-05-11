@@ -9,7 +9,6 @@
     tools:context=".MainActivity">
 
 
-
     <Button
         android:id="@+id/programs"
         android:layout_width="185dp"
@@ -28,7 +27,6 @@
         android:textColor="#0C0C0C"
         android:textSize="16sp"
         android:textStyle="bold"
-
         />
 
     <Button

@@ -1,5 +1,7 @@
 package com.example.washingmachine;
 
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import com.example.washingmachine.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
         programs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this,FirstFragment.class);
+                startActivity(intent);
             }
         });
 
@@ -86,6 +89,14 @@ public class MainActivity extends AppCompatActivity {
         tClock.setText(clock);
 
     }
+
+//    public void selectProgram(View view) {
+//        Intent intent = new Intent(this, FirstFragment.class);
+//        EditText editText = (EditText) findViewById(R.id.programs);
+//        String message = editText.getText().toString();
+//        intent.putExtra(EXTRA_MESSAGE, message);
+//        startActivity(intent);
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

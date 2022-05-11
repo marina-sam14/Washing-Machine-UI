@@ -9,4 +9,22 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="normal15">ΚΑΝΟΝΙΚΟ 15\'</string>
+    <string name="light">ΕΛΑΦΡΥ 60\'</string>
+    <string name="power">ΙΣΧΥΡΟ 60\'</string>
+
+    <string name="spinner">ΘΕΡΜΟΚΡΑΣΙΑ</string>
+    <string name="descr1">ΠΡΟΓΡΑΜΜΑ - ΔΙΑΡΚΕΙΑ</string>
+    <string name="descr2">ΕΠΙΠΛΕΟΝ ΕΠΙΛΟΓΕΣ</string>
+
+    <string name="extra1">ΣΤΥΨΙΜΟ</string>
+    <string name="extra2">ΞΕΒΓΑΛΜΑ</string>
+
+    
+    <string-array name="languages">
+        <item>30</item>
+        <item>40</item>
+        <item>60</item>
+        <item>90</item>
+    </string-array>
 </resources>
