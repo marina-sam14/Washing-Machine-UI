@@ -31,8 +31,13 @@
     <string name="settings">ΡΥΘΜΙΣΕΙΣ</string>
     <string name="notification">ΕΙΔΟΠΟΙΗΣΕΙΣ</string>
     <string name="wifi">ΑΠΕΝΕΡΓΟΠΟΙΗΣΗ WiFi</string>
+    <string name="working">Το πλυντήριο είναι σε:</string>
+    <string name="in_working"><u>ΛΕΙΤΟΥΡΓΙΑ</u></string>
+    <string name="example">ΚΑΝΟΝΙΚΟ 30 ΞΕΒΓΑΛΜΑ</string>
+    <string name="pause">ΠΑΥΣΗ</string>
+    <string name="cancel">ΤΕΡΜΑΤΙΣΜΟΣ</string>
 
-    
+
     <string-array name="languages">
         <item>30</item>
         <item>40</item>

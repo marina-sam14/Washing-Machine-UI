@@ -1,5 +1,6 @@
 package com.example.washingmachine;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -33,6 +35,15 @@ public class FirstFragment extends AppCompatActivity {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerLanguages.setAdapter(adapter);
+
+        ImageButton start = (ImageButton) findViewById(R.id.start);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FirstFragment.this,Laundring.class);
+                startActivity(intent);
+            }
+        });
 
         // Inflate the layout for this fragment
 //        return inflater.inflate(R.layout.fragment_first, container, false);

@@ -22,6 +22,8 @@
         </activity>
         <activity android:name=".FirstFragment" />
         <activity android:name=".Settings" />
+        <activity android:name=".Laundring" />
+
     </application>
 
 </manifest>
