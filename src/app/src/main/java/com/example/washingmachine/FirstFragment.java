@@ -43,6 +43,9 @@ public class FirstFragment extends AppCompatActivity {
         CheckBox progrBox1 = (CheckBox) findViewById(R.id.normalcheckBox6);
         CheckBox progrBox2 = (CheckBox) findViewById(R.id.normalcheckBox7);
         CheckBox progrBox3 = (CheckBox) findViewById(R.id.normalcheckBox5);
+        CheckBox favourite = (CheckBox) findViewById(R.id.normalcheckBox3);
+
+
         progrBox1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,8 +62,7 @@ public class FirstFragment extends AppCompatActivity {
                     progrBox2.setEnabled(true);
                     progrBox3.setEnabled(true);
 //                    Log.i("mytag","ΕΧΕΤΕ ΕΠΙΛΕΞΕΙ ΚΑΝΟΝΙΚΟ ΠΡΟΓΡΑΜΜΑ");
-                    Snackbar.make(v, "ΕΧΕΤΕ ΕΠΙΛΕΞΕΙ ΚΑΝΟΝΙΚΟ ΠΡΟΓΡΑΜΜΑ ΔΙΑΡΚΕΙΑΣ 15' ", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+
                 }
 
             }
@@ -88,6 +90,20 @@ public class FirstFragment extends AppCompatActivity {
                 if (checked){
 //                    Log.i("mytag","ΕΧΕΤΕ ΕΠΙΛΕΞΕΙ ΚΑΝΟΝΙΚΟ ΠΡΟΓΡΑΜΜΑ");
                     Snackbar.make(v, "ΕΧΕΤΕ ΕΠΙΛΕΞΕΙ ΙΣΧΥΡΟ ΠΡΟΓΡΑΜΜΑ ΔΙΑΡΚΕΙΑΣ 60' ", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+
+            }
+        });
+
+        favourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checked = ((CheckBox) v).isChecked();
+                // Check which checkbox was clicked
+                if (checked){
+//                    Log.i("mytag","ΕΧΕΤΕ ΕΠΙΛΕΞΕΙ ΚΑΝΟΝΙΚΟ ΠΡΟΓΡΑΜΜΑ");
+                    Snackbar.make(v, "ΕΧΕΤΕ ΕΠΙΛΕΞΕΙ ΤΟ ΑΓΑΠΗΜΕΝΟ ΣΑΣ ΠΡΟΓΡΑΜΜΑ ", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
 
@@ -126,11 +142,14 @@ public class FirstFragment extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!progrBox1.isChecked() && !progrBox2.isChecked() && !progrBox3.isChecked()){
+                if (!progrBox1.isChecked() && !progrBox2.isChecked() && !progrBox3.isChecked() && !favourite.isChecked()){
                     Snackbar.make(view, "ΠΡΕΠΕΙ ΝΑ ΕΠΙΛΕΞΕΤΕ ΠΡΟΓΡΑΜΜΑ ΓΙΑ ΝΑ ΞΕΚΙΝΗΣΕΤΕ", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
-
+                else if (favourite.isChecked()){
+                    Intent intent = new Intent(FirstFragment.this, Laundring.class);
+                    startActivity(intent);
+                }
                 else {
 //                    an kanoume diaforetika gia kathe thermokrasia, edw if-else
                     Intent intent = new Intent(FirstFragment.this, Laundring.class);

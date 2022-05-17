@@ -39,6 +39,7 @@
     <string name="extra2">ΞΕΒΓΑΛΜΑ 20\'</string>
     <string name="laundrying_time">Εκτιμώμενος χρόνος ολοκλήρωσης: 15\'</string>
     <string name="favourite">ΑΓΑΠΗΜΕΝΟ ΠΡΟΓΡΑΜΜΑ</string>
+    <string name="fav_temp">ΘΕΡΜΟΚΡΑΣΙΑ 30</string>
 
 
     <string-array name="languages">
