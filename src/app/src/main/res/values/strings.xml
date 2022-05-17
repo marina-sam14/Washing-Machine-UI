@@ -38,6 +38,7 @@
     <string name="extra1">ΣΤΥΨΙΜΟ 15\'</string>
     <string name="extra2">ΞΕΒΓΑΛΜΑ 20\'</string>
     <string name="laundrying_time">Εκτιμώμενος χρόνος ολοκλήρωσης: 15\'</string>
+    <string name="favourite">ΑΓΑΠΗΜΕΝΟ ΠΡΟΓΡΑΜΜΑ</string>
 
 
     <string-array name="languages">
