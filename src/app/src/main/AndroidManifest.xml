@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/images"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WashingMachine">
+        android:theme="@style/Theme.WashingMachine.NoActionBar">
         <activity
             android:name=".MainActivity"
             android:exported="true"

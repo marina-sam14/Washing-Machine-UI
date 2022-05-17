@@ -20,6 +20,8 @@ public class Laundring extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.laundrying);
 
+        String text = getIntent().getStringExtra("WASH_TEXT");
+        int tot = getIntent().getIntExtra("TOTAL_TIME", 42);
 
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -48,9 +50,11 @@ public class Laundring extends AppCompatActivity {
         animator.start();
 
         TextView header = (TextView) findViewById(R.id.textView4);
+        header.setText(text);
+
+        TextView estimate = (TextView) findViewById(R.id.textView9);
+        String finalTxt = "ΕΚΤΙΜΩΜΕΝΟΣ ΧΡΟΝΟΣ ΟΛΟΚΛΗΡΩΣΗΣ: " + Integer.toString(tot) + "'";
+        estimate.setText(finalTxt);
 
     }
-
-
-
 }

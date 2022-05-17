@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#217E8A"
+    android:background="#8dc2e3"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -13,11 +13,6 @@
         android:id="@+id/clock"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="245dp"
-        android:layout_marginEnd="6dp"
         android:format24Hour="hh:mm:ss"
         android:gravity="end"
         android:padding="20dp"
@@ -67,22 +62,20 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="287dp"
-        android:layout_height="67dp"
+        android:layout_width="212dp"
+        android:layout_height="53dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="37dp"
-        android:layout_marginEnd="93dp"
-        android:layout_marginBottom="307dp"
+        android:layout_marginStart="491dp"
+        android:layout_marginTop="40dp"
         android:text="@string/in_working"
         android:textColor="#0B0101"
         android:textSize="34sp" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="482dp"
-        android:layout_height="44dp"
+        android:layout_width="457dp"
+        android:layout_height="67dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="129dp"
@@ -91,7 +84,7 @@
         android:textColor="#0B0101"
         android:textSize="24sp" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/pause"
         android:layout_width="219dp"
         android:layout_height="112dp"
@@ -100,9 +93,11 @@
         android:layout_marginStart="192dp"
         android:layout_marginTop="280dp"
         android:backgroundTint="#C4918989"
-        android:text="@string/pause" />
+        android:text="@string/pause"
+        app:cornerRadius="30dp"
+        />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/cancel"
         android:layout_width="222dp"
         android:layout_height="115dp"
@@ -111,7 +106,8 @@
         android:layout_marginTop="276dp"
         android:layout_marginEnd="185dp"
         android:backgroundTint="#DC0E0E"
-        android:text="@string/cancel" />
+        android:text="@string/cancel"
+        app:cornerRadius="30dp"/>
 
     <TextView
         android:id="@+id/textView9"

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#217E8A"
+    android:background="#8dc2e3"
     android:orientation="horizontal">
 
 
@@ -15,10 +15,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="134dp"
-        android:layout_marginEnd="478dp"
-        android:layout_marginBottom="215dp"
+        android:layout_marginStart="107dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="382dp"
+        android:layout_marginBottom="213dp"
         android:text="@string/notification"
         android:textAlignment="center"
         android:textColor="#212121"
@@ -32,10 +32,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="234dp"
-        android:layout_marginEnd="465dp"
-        android:layout_marginBottom="115dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="243dp"
+        android:layout_marginEnd="427dp"
+        android:layout_marginBottom="106dp"
         android:text="@string/wifi"
         android:textAlignment="center"
         android:textColor="#212121"
@@ -66,8 +66,8 @@
         android:layout_height="73dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="109dp"
-        android:layout_marginEnd="332dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginEnd="264dp"
         android:buttonTint="#FFFFFF"
         tools:ignore="DuplicateSpeakableTextCheck" />
 
@@ -77,8 +77,8 @@
         android:layout_height="73dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="215dp"
-        android:layout_marginEnd="330dp"
+        android:layout_marginTop="227dp"
+        android:layout_marginEnd="262dp"
         android:buttonTint="#FFFFFF" />
 
     <TextClock
