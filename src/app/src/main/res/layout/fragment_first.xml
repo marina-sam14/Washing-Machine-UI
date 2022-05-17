@@ -179,8 +179,8 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="146dp"
-        android:layout_height="50dp"
+        android:layout_width="139dp"
+        android:layout_height="78dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="286dp"
@@ -190,7 +190,9 @@
         android:text="@string/spinner"
         android:textAlignment="center"
         android:textColor="@color/white"
-        tools:ignore="DuplicateSpeakableTextCheck" />
+        tools:ignore="DuplicateSpeakableTextCheck"
+
+        />
 
     <TextView
         android:id="@+id/textView6"
@@ -252,7 +254,6 @@
         android:layout_marginEnd="13dp"
         android:layout_marginBottom="18dp"
         android:backgroundTint="#217E8A"
-        android:contentDescription="TODO"
         app:srcCompat="@android:drawable/ic_menu_send"
         app:tint="#0EDD17"
         tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
@@ -280,7 +281,6 @@
         android:layout_marginStart="5dp"
         android:layout_marginBottom="5dp"
         android:backgroundTint="#091D8C"
-        android:contentDescription="TODO"
         app:srcCompat="@android:drawable/ic_menu_help"
         tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
 

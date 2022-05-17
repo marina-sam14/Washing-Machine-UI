@@ -22,8 +22,7 @@
     <string name="descr1">ΠΡΟΓΡΑΜΜΑ - ΔΙΑΡΚΕΙΑ</string>
     <string name="descr2">ΕΠΙΠΛΕΟΝ ΕΠΙΛΟΓΕΣ</string>
 
-    <string name="extra1">ΣΤΥΨΙΜΟ</string>
-    <string name="extra2">ΞΕΒΓΑΛΜΑ</string>
+
 
     <string name="next">ΕΠΟΜΕΝΟ</string>
 
@@ -36,6 +35,9 @@
     <string name="example">ΚΑΝΟΝΙΚΟ 30 ΞΕΒΓΑΛΜΑ</string>
     <string name="pause">ΠΑΥΣΗ</string>
     <string name="cancel">ΤΕΡΜΑΤΙΣΜΟΣ</string>
+    <string name="extra1">ΣΤΥΨΙΜΟ 15\'</string>
+    <string name="extra2">ΞΕΒΓΑΛΜΑ 20\'</string>
+    <string name="laundrying_time">Εκτιμώμενος χρόνος ολοκλήρωσης: 15\'</string>
 
 
     <string-array name="languages">
