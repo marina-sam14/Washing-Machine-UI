@@ -68,7 +68,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="491dp"
         android:layout_marginTop="40dp"
-        android:text="@string/in_working"
+        android:text="@string/paused"
         android:textColor="#0B0101"
         android:textSize="34sp" />
 
@@ -92,8 +92,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="192dp"
         android:layout_marginTop="280dp"
-        android:backgroundTint="#C4918989"
-        android:text="@string/pause"
+        android:backgroundTint="#068E0C"
+        android:text="@string/continued"
         app:cornerRadius="30dp" />
 
     <com.google.android.material.button.MaterialButton
@@ -106,7 +106,7 @@
         android:layout_marginEnd="185dp"
         android:backgroundTint="#DC0E0E"
         android:text="@string/cancel"
-        app:cornerRadius="30dp"/>
+        app:cornerRadius="30dp" />
 
     <TextView
         android:id="@+id/textView9"
@@ -120,7 +120,7 @@
         android:layout_marginTop="250dp"
         android:layout_marginEnd="162dp"
         android:layout_marginBottom="140dp"
-        android:text="@string/laundrying_time"
+        android:text="@string/on_pause"
         android:textColor="#FAFAFA"
         android:textSize="16sp" />
 

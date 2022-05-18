@@ -23,6 +23,9 @@
         <activity android:name=".FirstFragment" />
         <activity android:name=".Settings" />
         <activity android:name=".Laundring" />
+        <activity android:name=".Pause" />
+        <activity android:name=".PopUpCanceling" />
+        <activity android:name=".Cancelled" />
 
     </application>
 
