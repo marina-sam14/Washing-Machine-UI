@@ -51,6 +51,8 @@
     <string name="door">ΑΝΟΙΓΜΑ ΠΟΡΤΑΣ ΠΛΥΝΤΗΡΙΟΥ</string>
     <string name="program_info">ΔΙΑΛΕΞΕ ΠΡΟΓΡΑΜΜΑ</string>
     <string name="temp_info">ΔΙΑΛΕΞΕ ΘΕΡΜΟΚΡΑΣΙΑ</string>
+    <string name="extra_info">ΔΙΑΛΕΞΕ ΕΠΙΠΛΕΟΝ ΕΠΙΛΟΓΕΣ</string>
+    <string name="favourite_info">ΕΝΑΛΛΑΚΤΙΚΑ ΔΙΑΛΕΞΕ ΤΟ ΑΓΑΠΗΜΕΝΟ ΣΟΥ ΠΡΟΓΡΑΜΜΑ</string>
 
 
     <string-array name="languages">

@@ -391,7 +391,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="483dp"
         android:layout_marginBottom="248dp"
-        android:text="ΔΙΑΛΕΞΕ ΕΠΙΠΛΕΟΝ ΕΠΙΛΟΓΕΣ"
+        android:text="@string/extra_info"
         android:textAlignment="center"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -407,6 +407,19 @@
         android:text="@string/program_info"
         android:textAlignment="center"
         android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="117dp"
+        android:layout_height="77dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="676dp"
+        android:layout_marginBottom="252dp"
+        android:text="@string/favourite_info"
+        android:textAlignment="center"
+        android:textSize="14sp"
         android:textStyle="bold" />
 
     <ImageView
@@ -426,6 +439,16 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="458dp"
+        android:layout_marginBottom="216dp"
+        app:srcCompat="@drawable/dialog" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="177dp"
+        android:layout_height="127dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="650dp"
         android:layout_marginBottom="216dp"
         app:srcCompat="@drawable/dialog" />
 

@@ -67,7 +67,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="491dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="34dp"
         android:text="@string/paused"
         android:textColor="#0B0101"
         android:textSize="34sp" />
