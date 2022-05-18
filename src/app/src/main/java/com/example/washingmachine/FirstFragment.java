@@ -3,6 +3,8 @@ package com.example.washingmachine;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
@@ -16,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -25,7 +28,10 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class FirstFragment extends AppCompatActivity {
 
-//    private FragmentFirstBinding binding;
+//    private AlertDialog.Builder dialogBuilder;
+//    private AlertDialog dialog;
+//    TextView helper_choices;
+//    ImageButton helper = (ImageButton)findViewById(R.id.helper);
 
 
 
@@ -49,6 +55,15 @@ public class FirstFragment extends AppCompatActivity {
         TextView normal = (TextView) findViewById(R.id.normal4);
         TextView light = (TextView) findViewById(R.id.normal2);
         TextView powerful = (TextView) findViewById(R.id.normal3);
+
+        CheckBox extra1 = (CheckBox) findViewById(R.id.normalcheckBox8);
+        CheckBox extra2 = (CheckBox) findViewById(R.id.normalcheckBox9);
+
+        ImageButton start = (ImageButton) findViewById(R.id.start);
+
+        ImageButton helper = (ImageButton) findViewById(R.id.helper);
+
+
 
         progrBox1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,8 +152,7 @@ public class FirstFragment extends AppCompatActivity {
             }
         });
 
-        CheckBox extra1 = (CheckBox) findViewById(R.id.normalcheckBox8);
-        CheckBox extra2 = (CheckBox) findViewById(R.id.normalcheckBox9);
+
         extra1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,7 +179,15 @@ public class FirstFragment extends AppCompatActivity {
             }
         });
 
-        ImageButton start = (ImageButton) findViewById(R.id.start);
+        helper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FirstFragment.this, Helper.class);
+                startActivity(intent);
+            }
+        });
+
+
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -236,8 +258,13 @@ public class FirstFragment extends AppCompatActivity {
         });
 
 
-    }
 
+    }
+//    public void createHelper() {
+//        dialogBuilder = new AlertDialog.Builder(this);
+//        final View popUp = getLayoutInflater().inflate(R.layout.helper,null);
+//
+//    }
 
 }
 

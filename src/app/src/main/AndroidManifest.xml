@@ -26,6 +26,7 @@
         <activity android:name=".Pause" />
         <activity android:name=".PopUpCanceling" />
         <activity android:name=".Cancelled" />
+        <activity android:name=".Helper" />
 
     </application>
 
