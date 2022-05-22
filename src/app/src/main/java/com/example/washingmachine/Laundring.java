@@ -8,6 +8,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.View;
@@ -25,6 +26,9 @@ import java.util.Calendar;
 public class Laundring extends AppCompatActivity {
 
     boolean paused = false;
+    private int status=0;
+    Handler handler = new Handler();
+
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -55,26 +59,45 @@ public class Laundring extends AppCompatActivity {
         tClock.setText(clock);
 
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        Drawable progressDrawable = progressBar.getIndeterminateDrawable().mutate();
-        progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
-        progressBar.setProgressDrawable(progressDrawable);
-        progressBar.setIndeterminate(true);
-        progressBar.setProgressTintList((ColorStateList.valueOf(Color.RED)));
-        ValueAnimator animator = ValueAnimator.ofInt(0, progressBar.getMax());
-        animator.setDuration(3000);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+        new Thread(new Runnable() {
             @Override
-            public void onAnimationUpdate(ValueAnimator animation){
-                progressBar.setProgress((Integer)animation.getAnimatedValue());
+            public void run() {
+                while (status < 100){
+                    status++;
+                    android.os.SystemClock.sleep(500);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBar.setProgress(status);
+                        }
+                    });
+                }
             }
-        });
-        animator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-            }
-        });
-        animator.start();
+        }).start();
+
+
+//        Drawable progressDrawable = progressBar.getIndeterminateDrawable().mutate();
+//        progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+//        progressBar.setProgressDrawable(progressDrawable);
+//        progressBar.setIndeterminate(true);
+//        progressBar.setProgressTintList((ColorStateList.valueOf(Color.RED)));
+//        ValueAnimator animator = ValueAnimator.ofInt(0, progressBar.getMax());
+//        animator.setDuration(3000);
+//        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//            @Override
+//            public void onAnimationUpdate(ValueAnimator animation){
+//                progressBar.setProgress((Integer)animation.getAnimatedValue());
+//            }
+//        });
+//        animator.addListener(new AnimatorListenerAdapter() {
+//            @Override
+//            public void onAnimationEnd(Animator animation) {
+//                super.onAnimationEnd(animation);
+//            }
+//        });
+//        animator.start();
+
 
         Button pauseBtn = (Button) findViewById(R.id.continued);
         Button cancelBtn = (Button) findViewById(R.id.cancelled);
@@ -88,19 +111,26 @@ public class Laundring extends AppCompatActivity {
                     workTxt.setText(content);
                     estimate.setText("ΕΚΤΙΜΩΜΕΝΟΣ ΧΡΟΝΟΣ ΟΛΟΚΛΗΡΩΣΗΣ: " + tot + "'");
                     pauseBtn.setText("ΠΑΥΣΗ");
-                    animator.pause();
-                    paused = false;
-                }else {
+                    progressBar.setVisibility(View.VISIBLE);
+
+
+                } else {
                     SpannableString content = new SpannableString("ΠΑΥΣΗ");
                     content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
                     workTxt.setText(content);
                     estimate.setText("ΕΚΤΙΜΩΜΕΝΟΣ ΧΡΟΝΟΣ ΟΛΟΚΛΗΡΩΣΗΣ: ΠΑΥΣΗ");
                     pauseBtn.setText("ΣΥΝΕΧΙΣΗ ΠΛΥΣΗΣ");
-                    animator.start();
+//                    animator.pause();
+                    progressBar.setVisibility(View.INVISIBLE);
+//                    pauseBtn.setBackgroundColor(Color.GREEN);
                     paused = true;
                 }
             }
         });
+
+
+
+
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
