@@ -65,7 +65,7 @@
         android:layout_marginBottom="309dp"
         android:text="@string/advices"
         android:textAlignment="center"
-        android:textColor="#0EC515"
+        android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold" />
 

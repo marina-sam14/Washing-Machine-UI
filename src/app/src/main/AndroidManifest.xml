@@ -16,18 +16,13 @@
             android:theme="@style/Theme.WashingMachine.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".FirstFragment" />
         <activity android:name=".Settings" />
         <activity android:name=".Laundring" />
-        <activity android:name=".Pause" />
         <activity android:name=".PopUpCanceling" />
-        <activity android:name=".Cancelled" />
         <activity android:name=".Helper" />
-
     </application>
-
 </manifest>

@@ -1,82 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#8dc2e3"
     android:orientation="vertical"
-    tools:context=".MainActivity"
-    >
+    tools:context=".MainActivity" >
 
+    <View
+        android:id="@+id/divider"
+        android:src="@android:drawable/divider_horizontal_bright"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="#313336"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/programs"
         style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/settings"
+        android:layout_width="250dp"
         android:layout_height="155dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="165dp"
-        android:layout_marginTop="116dp"
-        android:layout_marginEnd="147dp"
-        android:layout_marginBottom="460dp"
         android:backgroundTint="@color/white"
         android:text="@string/home1"
         android:textColor="#0C0C0C"
-        android:textSize="16sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         app:cornerRadius="40dp" />
 
-    <Button
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/settings"
-        android:layout_width="95dp"
-        android:layout_height="146dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="174dp"
-        android:layout_marginTop="302dp"
-        android:layout_marginEnd="141dp"
-        android:layout_marginBottom="283dp"
+        app:layout_constraintTop_toBottomOf="@id/programs"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/cancelled"
         android:backgroundTint="@color/white"
+        android:layout_width="250dp"
+        android:layout_height="155dp"
         android:text="@string/home2"
         android:textColor="#0C0C0C"
-        android:textSize="16sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         app:cornerRadius="40dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/cancelled"
+        android:layout_width="250dp"
+        android:layout_height="155dp"
+        app:layout_constraintTop_toBottomOf="@id/settings"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:backgroundTint="@color/white"
+        android:textColor="#0C0C0C"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        android:text="@string/door"
+        app:cornerRadius="40dp" />
+
 
     <TextClock
         android:id="@+id/clock"
-        android:layout_width="160dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="247dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="4dp"
+        app:layout_constraintTop_toTopOf="@id/divider"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/date"
+        app:layout_constraintBottom_toBottomOf="@id/divider"
+        app:layout_constraintHorizontal_bias="0.3"
         android:format24Hour="hh:mm:ss"
-        android:gravity="end"
-        android:padding="20dp"
-        android:textSize="25sp" />
+        android:textColor="@color/white"
+        android:textSize="50sp" />
 
     <TextView
         android:id="@+id/date"
-        android:layout_width="191dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/divider"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/divider"
+        android:textSize="50sp"
+        android:textColor="@color/white"/>
 
-        />
 
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

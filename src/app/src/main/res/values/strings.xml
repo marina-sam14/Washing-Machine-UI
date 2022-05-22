@@ -18,9 +18,9 @@
     <string name="light">ΕΛΑΦΡΥ 60\'</string>
     <string name="power">ΙΣΧΥΡΟ 60\'</string>
 
-    <string name="spinner">ΘΕΡΜΟΚΡΑΣΙΑ</string>
-    <string name="descr1">ΠΡΟΓΡΑΜΜΑ - ΔΙΑΡΚΕΙΑ</string>
-    <string name="descr2">ΕΠΙΠΛΕΟΝ ΕΠΙΛΟΓΕΣ</string>
+    <string name="spinner"><u>ΘΕΡΜΟΚΡΑΣΙΑ</u></string>
+    <string name="descr1"><u>ΠΡΟΓΡΑΜΜΑ - ΔΙΑΡΚΕΙΑ</u></string>
+    <string name="descr2"><u>ΕΠΙΠΛΕΟΝ ΕΠΙΛΟΓΕΣ</u></string>
 
 
 
@@ -38,7 +38,7 @@
     <string name="extra1">ΣΤΥΨΙΜΟ 15\'</string>
     <string name="extra2">ΞΕΒΓΑΛΜΑ 20\'</string>
     <string name="laundrying_time">Εκτιμώμενος χρόνος ολοκλήρωσης: 15\'</string>
-    <string name="favourite">ΑΓΑΠΗΜΕΝΟ ΠΡΟΓΡΑΜΜΑ</string>
+    <string name="favourite"><u>ΑΓΑΠΗΜΕΝΟ ΠΡΟΓΡΑΜΜΑ</u></string>
     <string name="fav_temp">ΘΕΡΜΟΚΡΑΣΙΑ 30</string>
     <string name="paused">ΠΑΥΣΗ</string>
     <string name="continued">ΣΥΝΕΧΙΣΗ ΠΛΥΣΗΣ</string>

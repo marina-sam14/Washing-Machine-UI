@@ -4,6 +4,7 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -22,6 +23,8 @@ import com.example.washingmachine.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextClock;
@@ -38,15 +41,18 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
-
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
         Button programs = (Button)findViewById(R.id.programs);
         Button settings = (Button)findViewById(R.id.settings);
+        Button door = (Button) findViewById(R.id.cancelled);
 
         programs.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,20 +70,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        door.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "ΠΕΡΙΜΕΝΕΤΕ ΝΑ ΑΚΟΥΣΕΤΕ ΤΟΝ ΗΧΟ ΤΗΣ ΠΟΡΤΑΣ ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                MediaPlayer music = MediaPlayer.create(MainActivity.this, R.raw.door);
+                music.start();
+            }
+        });
 
-//        Calendar c = Calendar.getInstance();
-//        System.out.println("Current time => "+c.getTime());
-//
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        String formattedDate = df.format(c.getTime());
-//        // formattedDate have current date/time
-//        Toast.makeText(this, formattedDate, Toast.LENGTH_SHORT).show();
-//
-//        TextView txtView = new TextView(this);
-//        txtView.setText("Current Date and Time : "+formattedDate);
-//        txtView.setGravity(Gravity.START);
-//        txtView.setTextSize(20);
-//        setContentView(txtView);
         TextView date = (TextView) findViewById(R.id.date);
         Calendar  calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -87,16 +88,8 @@ public class MainActivity extends AppCompatActivity {
         TextView tClock = (TextView) findViewById(R.id.clock);
         String clock = tClock.getText().toString();
         tClock.setText(clock);
-
     }
 
-//    public void selectProgram(View view) {
-//        Intent intent = new Intent(this, FirstFragment.class);
-//        EditText editText = (EditText) findViewById(R.id.programs);
-//        String message = editText.getText().toString();
-//        intent.putExtra(EXTRA_MESSAGE, message);
-//        startActivity(intent);
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

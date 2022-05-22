@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,120 +9,124 @@
     tools:context=".MainActivity">
 
 
+    <View
+        android:id="@+id/divider"
+        android:src="@android:drawable/divider_horizontal_bright"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="#313336"/>
+
     <TextClock
         android:id="@+id/clock"
-        android:layout_width="160dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/divider"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/date"
+        app:layout_constraintBottom_toBottomOf="@id/divider"
+        app:layout_constraintHorizontal_bias="0.3"
         android:format24Hour="hh:mm:ss"
-        android:gravity="end"
-        android:padding="20dp"
-        android:textSize="25sp" />
+        android:textColor="@color/white"
+        android:textSize="50sp" />
 
     <TextView
         android:id="@+id/date"
-        android:layout_width="191dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="parent"
-
-        />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/divider"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/divider"
+        android:textSize="50sp"
+        android:textColor="@color/white"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="620dp"
         android:layout_height="99dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="82dp"
-        android:layout_marginTop="177dp"
-        android:layout_marginEnd="81dp"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:theme="@style/Widget.AppCompat.ProgressBar.Horizontal" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="266dp"
+        android:id="@+id/workText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="420dp"
-        android:layout_marginBottom="320dp"
         android:text="@string/working"
-        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/working"
+        app:layout_constraintBottom_toTopOf="@id/info"
+        android:layout_marginStart="250dp"
         android:textColor="#0C0B0B"
-        android:textSize="24sp" />
+        android:textSize="30sp" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="212dp"
-        android:layout_height="53dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="491dp"
-        android:layout_marginTop="40dp"
+        android:id="@+id/working"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/in_working"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintLeft_toRightOf="@id/workText"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/info"
+        android:layout_marginEnd="250dp"
         android:textColor="#0B0101"
-        android:textSize="34sp" />
+        android:textSize="30sp"/>
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="457dp"
-        android:layout_height="67dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="129dp"
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/example"
         android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@id/progressBar"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginBottom="30dp"
         android:textColor="#0B0101"
-        android:textSize="24sp" />
+        android:textSize="35sp"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/continued"
         android:layout_width="219dp"
         android:layout_height="112dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="192dp"
-        android:layout_marginTop="280dp"
         android:backgroundTint="#C4918989"
         android:text="@string/pause"
-        app:cornerRadius="30dp" />
+        app:layout_constraintTop_toBottomOf="@id/remainder"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/cancelled"
+        android:layout_marginTop="40dp"
+        android:textSize="25sp"
+        app:cornerRadius="30dp"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/cancelled"
         android:layout_width="222dp"
         android:layout_height="115dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="276dp"
-        android:layout_marginEnd="185dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/continued"
+        app:layout_constraintTop_toBottomOf="@id/remainder"
         android:backgroundTint="#DC0E0E"
         android:text="@string/cancel"
+        android:textSize="23sp"
+        android:layout_marginTop="40dp"
         app:cornerRadius="30dp"/>
 
     <TextView
-        android:id="@+id/textView9"
-        android:layout_width="369dp"
+        android:id="@+id/remainder"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="199dp"
-        android:layout_marginTop="250dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginBottom="140dp"
+        app:layout_constraintTop_toBottomOf="@id/progressBar"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         android:text="@string/laundrying_time"
-        android:textColor="#FAFAFA"
-        android:textSize="16sp" />
+        android:textColor="#0C0B0B"
+        android:textSize="25sp" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
