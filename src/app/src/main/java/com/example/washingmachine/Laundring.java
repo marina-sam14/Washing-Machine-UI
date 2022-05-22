@@ -38,6 +38,8 @@ public class Laundring extends AppCompatActivity {
         int tot = getIntent().getIntExtra("TOTAL_TIME", 42);
 
         TextView workTxt = (TextView) findViewById(R.id.working);
+        TextView info = (TextView) findViewById(R.id.info);
+        info.setText(text);
         TextView estimate = (TextView) findViewById(R.id.remainder);
         String finalTxt = "ΕΚΤΙΜΩΜΕΝΟΣ ΧΡΟΝΟΣ ΟΛΟΚΛΗΡΩΣΗΣ: " + tot + "'";
         estimate.setText(finalTxt);
