@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#8dc2e3"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <TextClock
+        android:id="@+id/clock"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:format24Hour="hh:mm:ss"
+        android:gravity="end"
+        android:padding="20dp"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="323dp"
+        android:layout_height="51dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintHorizontal_bias="0.43"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="395dp"
+        android:layout_marginBottom="352dp" />
+
+    <ImageView
+        android:layout_width="159dp"
+        android:layout_height="106dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="323dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="250dp"
+        android:background="#8dc2e3"
+        android:src="@drawable/check" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="689dp"
+        android:layout_height="86dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="-8dp"
+        android:layout_marginBottom="125dp"
+        android:text="@string/successful_laundring"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/home_page"
+        android:layout_width="219dp"
+        android:layout_height="112dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="227dp"
+        android:layout_marginTop="274dp"
+        android:backgroundTint="#03A80A"
+        android:text="@string/home_page"
+        app:cornerRadius="30dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/cancelled"
+        android:layout_width="222dp"
+        android:layout_height="115dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="271dp"
+        android:layout_marginEnd="214dp"
+        android:backgroundTint="#073B42"
+        android:text="@string/door"
+        app:cornerRadius="30dp" />
+
+
+</RelativeLayout>

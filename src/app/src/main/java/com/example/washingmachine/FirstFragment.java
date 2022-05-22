@@ -82,7 +82,7 @@ public class FirstFragment extends AppCompatActivity {
                 boolean checked = ((CheckBox) v).isChecked();
                 // Check which checkbox was clicked
                 if (checked) {
-                    Snackbar.make(v, "ΕΧΕΤΕ ΕΠΙΛΕΞΕΙ ΤΟ ΑΓΑΠΗΜΕΝΟ ΠΡΟΓΡΑΜΜΑ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    Snackbar.make(v, "ΕΧΕΤΕ ΕΠΙΛΕΞΕΙ ΤΟ ΑΓΑΠΗΜΕΝΟ ΣΑΣ ΠΡΟΓΡΑΜΜΑ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     normal.setEnabled(false);
                     light.setEnabled(false);
                     strong.setEnabled(false);

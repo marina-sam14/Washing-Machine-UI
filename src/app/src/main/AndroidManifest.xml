@@ -24,5 +24,6 @@
         <activity android:name=".Laundring" />
         <activity android:name=".PopUpCanceling" />
         <activity android:name=".Helper" />
+        <activity android:name=".Completed" />
     </application>
 </manifest>

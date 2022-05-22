@@ -3,6 +3,7 @@ package com.example.washingmachine;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -73,36 +74,19 @@ public class Laundring extends AppCompatActivity {
                         }
                     });
                 }
+                Intent intent = new Intent(Laundring.this,Completed.class);
+                startActivity(intent);
             }
         }).start();
 
 
-//        Drawable progressDrawable = progressBar.getIndeterminateDrawable().mutate();
-//        progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
-//        progressBar.setProgressDrawable(progressDrawable);
-//        progressBar.setIndeterminate(true);
-//        progressBar.setProgressTintList((ColorStateList.valueOf(Color.RED)));
-//        ValueAnimator animator = ValueAnimator.ofInt(0, progressBar.getMax());
-//        animator.setDuration(3000);
-//        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//            @Override
-//            public void onAnimationUpdate(ValueAnimator animation){
-//                progressBar.setProgress((Integer)animation.getAnimatedValue());
-//            }
-//        });
-//        animator.addListener(new AnimatorListenerAdapter() {
-//            @Override
-//            public void onAnimationEnd(Animator animation) {
-//                super.onAnimationEnd(animation);
-//            }
-//        });
-//        animator.start();
 
 
         Button pauseBtn = (Button) findViewById(R.id.continued);
         Button cancelBtn = (Button) findViewById(R.id.cancelled);
 
         pauseBtn.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
                 if (paused) {
@@ -112,6 +96,7 @@ public class Laundring extends AppCompatActivity {
                     estimate.setText("ΕΚΤΙΜΩΜΕΝΟΣ ΧΡΟΝΟΣ ΟΛΟΚΛΗΡΩΣΗΣ: " + tot + "'");
                     pauseBtn.setText("ΠΑΥΣΗ");
                     progressBar.setVisibility(View.VISIBLE);
+                    pauseBtn.setBackgroundColor(Color.GRAY);
 
 
                 } else {
@@ -122,7 +107,7 @@ public class Laundring extends AppCompatActivity {
                     pauseBtn.setText("ΣΥΝΕΧΙΣΗ ΠΛΥΣΗΣ");
 //                    animator.pause();
                     progressBar.setVisibility(View.INVISIBLE);
-//                    pauseBtn.setBackgroundColor(Color.GREEN);
+                    pauseBtn.setBackgroundColor(Color.parseColor("#81c639"));
                     paused = true;
                 }
             }
