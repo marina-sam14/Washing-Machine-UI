@@ -28,7 +28,7 @@ public class PopUpCanceling extends AppCompatActivity {
         setContentView(R.layout.popup_cancel);
 
         Button continued = (Button) findViewById(R.id.continued);
-        Button cancel = (Button) findViewById(R.id.cancelled);
+        Button cancel = (Button) findViewById(R.id.door);
 
         ImageView image = (ImageView) findViewById(R.id.imageView3);
         TextView txt = (TextView) findViewById(R.id.text);
@@ -65,11 +65,11 @@ public class PopUpCanceling extends AppCompatActivity {
                     music.start();
                 } else {
                     txt.setText("Η ΠΛΥΣΗ ΑΚΥΡΩΘΗΚΕ ΜΕ ΕΠΙΤΥΧΙΑ");
-                    image.setImageResource(R.drawable.check);
+                    image.setImageResource(R.drawable.ic_wrong);
                     continued.setText("ΕΠΙΣΤΡΟΦΗ ΣΤΗΝ ΑΡΧΗ");
                     cancel.setText("ΑΝΟΙΓΜΑ ΠΟΡΤΑΣ ΠΛΥΝΤΗΡΙΟΥ");
-                    cancel.setBackgroundTintList(getResources().getColorStateList(R.color.myGreen));
-                    continued.setBackgroundTintList(getResources().getColorStateList(R.color.otherGreen));
+                    cancel.setBackgroundTintList(getResources().getColorStateList(R.color.otherGreen));
+                    continued.setBackgroundTintList(getResources().getColorStateList(R.color.myGreen));
                     returnexists = true;
                     openexists = true;
                 }

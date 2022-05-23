@@ -1,17 +1,15 @@
 package com.example.washingmachine;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
+import com.example.washingmachine.databinding.ActivityMainBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.Gravity;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -19,22 +17,15 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.washingmachine.databinding.ActivityMainBinding;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextClock;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button programs = (Button)findViewById(R.id.programs);
         Button settings = (Button)findViewById(R.id.settings);
-        Button door = (Button) findViewById(R.id.cancelled);
+        Button door = (Button) findViewById(R.id.door);
 
         programs.setOnClickListener(new View.OnClickListener() {
             @Override

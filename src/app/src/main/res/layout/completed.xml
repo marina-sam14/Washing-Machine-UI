@@ -9,30 +9,6 @@
     tools:context=".MainActivity">
 
 
-    <TextClock
-        android:id="@+id/clock"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:format24Hour="hh:mm:ss"
-        android:gravity="end"
-        android:padding="20dp"
-        android:textSize="25sp" />
-
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="323dp"
-        android:layout_height="51dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        app:layout_constraintHorizontal_bias="0.43"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="395dp"
-        android:layout_marginBottom="352dp" />
 
     <ImageView
         android:layout_width="159dp"
@@ -40,11 +16,12 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="323dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="250dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="293dp"
         android:background="#8dc2e3"
-        android:src="@drawable/check" />
+        app:srcCompat="@drawable/ic_check" />
 
     <TextView
         android:id="@+id/textView11"
@@ -55,10 +32,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="-8dp"
-        android:layout_marginBottom="125dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="202dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="123dp"
         android:text="@string/successful_laundring"
         android:textAlignment="center"
         android:textSize="34sp"
@@ -77,7 +54,7 @@
         app:cornerRadius="30dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/cancelled"
+        android:id="@+id/door"
         android:layout_width="222dp"
         android:layout_height="115dp"
         android:layout_alignParentTop="true"

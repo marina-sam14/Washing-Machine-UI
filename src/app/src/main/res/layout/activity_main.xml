@@ -43,13 +43,13 @@
         android:textSize="23sp"
         android:textStyle="bold"
         app:cornerRadius="40dp"
-        app:layout_constraintBottom_toTopOf="@id/cancelled"
+        app:layout_constraintBottom_toTopOf="@id/door"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/programs" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/cancelled"
+        android:id="@+id/door"
         android:layout_width="270dp"
         android:layout_height="153dp"
         android:backgroundTint="@color/white"
@@ -68,21 +68,21 @@
         android:id="@+id/clock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/divider"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/date"
-        app:layout_constraintBottom_toBottomOf="@id/divider"
-        app:layout_constraintHorizontal_bias="0.3"
         android:format24Hour="hh:mm:ss"
         android:textColor="@color/white"
-        android:textSize="50sp" />
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@id/divider"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintLeft_toRightOf="@id/date"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/divider" />
 
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="50sp"
+        android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="@id/divider"
         app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintLeft_toLeftOf="parent"

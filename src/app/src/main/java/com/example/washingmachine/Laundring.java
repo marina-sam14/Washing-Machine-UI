@@ -1,13 +1,8 @@
 package com.example.washingmachine;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.SpannableString;
@@ -29,6 +24,7 @@ public class Laundring extends AppCompatActivity {
     boolean paused = false;
     private int status=0;
     Handler handler = new Handler();
+    boolean isRunning = true;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,30 +56,36 @@ public class Laundring extends AppCompatActivity {
         tClock.setText(clock);
 
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar.getProgressDrawable().setColorFilter(
+                Color.BLACK, android.graphics.PorterDuff.Mode.SRC_IN);
+        progressBar.getLayoutParams().height = 200;
+//        progressBar.invalidate();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (status < 100){
-                    status++;
-                    android.os.SystemClock.sleep(500);
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressBar.setProgress(status);
-                        }
-                    });
-                }
-                Intent intent = new Intent(Laundring.this,Completed.class);
-                startActivity(intent);
-            }
-        }).start();
+      Thread thread = new Thread(new Runnable() {
+          @Override
+          public void run() {
+              while (status < 100) {
+                  status++;
+                  android.os.SystemClock.sleep(500);
+                  handler.post(new Runnable() {
+                      @Override
+                      public void run() {
+                          progressBar.setProgress(status);
 
 
+                      }
+                  });
+              }
+              Intent intent = new Intent(Laundring.this, Completed.class);
+              startActivity(intent);
+          }
+      });
+
+      thread.start();
 
 
         Button pauseBtn = (Button) findViewById(R.id.continued);
-        Button cancelBtn = (Button) findViewById(R.id.cancelled);
+        Button cancelBtn = (Button) findViewById(R.id.door);
 
         pauseBtn.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
@@ -109,6 +111,7 @@ public class Laundring extends AppCompatActivity {
                     progressBar.setVisibility(View.INVISIBLE);
                     pauseBtn.setBackgroundColor(Color.parseColor("#81c639"));
                     paused = true;
+                    thread.interrupt();
                 }
             }
         });
@@ -120,8 +123,12 @@ public class Laundring extends AppCompatActivity {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isRunning=false;
                 Intent intent = new Intent(Laundring.this, PopUpCanceling.class);
                 startActivity(intent);
+//                Thread.interrupted();
+                thread.interrupt();
+
             }
         });
     }

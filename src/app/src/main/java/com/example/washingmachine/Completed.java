@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,7 +22,7 @@ public class Completed extends AppCompatActivity {
         setContentView(R.layout.completed);
 
         Button home_page = (Button) findViewById(R.id.home_page);
-        Button door = (Button) findViewById(R.id.cancelled);
+        Button door = (Button) findViewById(R.id.door);
 
         home_page.setOnClickListener(new View.OnClickListener() {
             @Override
