@@ -42,12 +42,13 @@
         app:layout_constraintTop_toTopOf="@id/divider"
         app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
+    <TextView
         android:id="@+id/voicecommand"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:textSize="23sp"/>
 
     <ImageButton
         android:id="@+id/voice"

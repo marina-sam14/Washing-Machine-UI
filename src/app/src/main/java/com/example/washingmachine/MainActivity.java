@@ -73,27 +73,15 @@ public class MainActivity extends AppCompatActivity {
 
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
         final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "el-GR");
 
         voice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (voiceOn) {
                     voiceOn = false;
-                    voice.setImageResource(R.drawable.ic_baseline_mic);
-                    Snackbar.make(view, "ΑΠΕΝΕΡΓΟΠΟΙΗΣΑΤΕ ΤΗΝ ΦΩΝΗΤΙΚΗ ΠΕΡΙΗΓΗΣΗ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                    //voicecom.setVisibility(View.GONE);
-                    //date.setVisibility(View.VISIBLE);
-                    //clock.setVisibility(View.VISIBLE);
                     speechRecognizer.startListening(speechRecognizerIntent);
-                } else {
-                    voiceOn = true;
-                    voice.setImageResource(R.drawable.ic_baseline_mic_off);
-                    Snackbar.make(view, "ΕΝΕΡΓΟΠΟΙΗΣΑΤΕ ΤΗΝ ΦΩΝΗΤΙΚΗ ΠΕΡΙΗΓΗΣΗ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                    voicecom.setVisibility(View.VISIBLE);
-                    date.setVisibility(View.INVISIBLE);
-                    clock.setVisibility(View.INVISIBLE);
-                    speechRecognizer.stopListening();
                 }
             }
         });
@@ -106,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onBeginningOfSpeech() {
-
+                voicecom.setText("ΑΚΟΥΩ...");
             }
 
             @Override
@@ -121,7 +109,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onEndOfSpeech() {
-
+                voice.setImageResource(R.drawable.ic_baseline_mic_off);
+                voicecom.setVisibility(View.VISIBLE);
+                date.setVisibility(View.INVISIBLE);
+                clock.setVisibility(View.INVISIBLE);
+                voiceOn = true;
+                speechRecognizer.stopListening();
             }
 
             @Override
@@ -131,6 +124,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResults(Bundle results) {
+                voice.setImageResource(R.drawable.ic_baseline_mic);
+                voicecom.setVisibility(View.GONE);
+                date.setVisibility(View.VISIBLE);
+                clock.setVisibility(View.VISIBLE);
                 ArrayList<String> data = results.getStringArrayList(speechRecognizer.RESULTS_RECOGNITION);
                 voicecom.setText(data.get(0));
             }
