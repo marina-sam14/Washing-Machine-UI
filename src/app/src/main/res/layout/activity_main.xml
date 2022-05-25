@@ -44,23 +44,24 @@
 
     <TextView
         android:id="@+id/voicecommand"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:textColor="@color/white"
-        android:textSize="23sp"/>
+        android:textSize="34sp"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/voice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/divider"
+        android:background="#8dc2e3"
+        android:src="@drawable/ic_baseline_mic_off"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/door"
-        android:src="@drawable/ic_baseline_mic"
+        app:layout_constraintTop_toBottomOf="@id/divider"
         app:layout_constraintVertical_bias="0.86"
-        android:background="#8dc2e3"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/programs"

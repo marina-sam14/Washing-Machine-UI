@@ -24,7 +24,9 @@ public class Laundring extends AppCompatActivity {
     boolean paused = false;
     private int status=0;
     Handler handler = new Handler();
-    boolean isRunning = true;
+    boolean pressedCancel = false;
+
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,38 +62,16 @@ public class Laundring extends AppCompatActivity {
                 Color.BLACK, android.graphics.PorterDuff.Mode.SRC_IN);
         progressBar.getLayoutParams().height = 200;
 //        progressBar.invalidate();
-
-      Thread thread = new Thread(new Runnable() {
-          @Override
-          public void run() {
-              while (status < 100) {
-                  status++;
-                  android.os.SystemClock.sleep(500);
-                  handler.post(new Runnable() {
-                      @Override
-                      public void run() {
-                          progressBar.setProgress(status);
-
-
-                      }
-                  });
-              }
-              Intent intent = new Intent(Laundring.this, Completed.class);
-              startActivity(intent);
-          }
-      });
-
-      thread.start();
-
-
         Button pauseBtn = (Button) findViewById(R.id.continued);
         Button cancelBtn = (Button) findViewById(R.id.door);
+
 
         pauseBtn.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
                 if (paused) {
+
                     SpannableString content = new SpannableString("ΛΕΙΤΟΥΡΓΙΑ");
                     content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
                     workTxt.setText(content);
@@ -101,7 +81,9 @@ public class Laundring extends AppCompatActivity {
                     pauseBtn.setBackgroundColor(Color.GRAY);
 
 
+
                 } else {
+
                     SpannableString content = new SpannableString("ΠΑΥΣΗ");
                     content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
                     workTxt.setText(content);
@@ -111,7 +93,9 @@ public class Laundring extends AppCompatActivity {
                     progressBar.setVisibility(View.INVISIBLE);
                     pauseBtn.setBackgroundColor(Color.parseColor("#81c639"));
                     paused = true;
-                    thread.interrupt();
+                    String text = getIntent().getStringExtra("WASH_TEXT");
+                    int tot = getIntent().getIntExtra("TOTAL_TIME", 42);
+
                 }
             }
         });
@@ -123,14 +107,40 @@ public class Laundring extends AppCompatActivity {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isRunning=false;
+                pressedCancel=true;
                 Intent intent = new Intent(Laundring.this, PopUpCanceling.class);
                 startActivity(intent);
 //                Thread.interrupted();
-                thread.interrupt();
+
 
             }
         });
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (status < 100 && !pressedCancel) {
+                    status++;
+                    android.os.SystemClock.sleep(500);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBar.setProgress(status);
+
+                        }
+                    });
+                    if (status==100){
+                        Intent intent=new Intent(Laundring.this,Completed.class);
+                        startActivity(intent);
+                    }
+                }
+
+
+
+            }
+
+        });
+        thread.start();
     }
 
     @Override

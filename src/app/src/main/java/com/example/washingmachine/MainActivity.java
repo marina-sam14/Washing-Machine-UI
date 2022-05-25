@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         TextView date = findViewById(R.id.date);
         TextView clock = findViewById(R.id.clock);
         TextView voicecom = findViewById(R.id.voicecommand);
-        voicecom.setVisibility(View.GONE);
+        voicecom.setVisibility(View.VISIBLE);
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 1);
@@ -77,11 +77,18 @@ public class MainActivity extends AppCompatActivity {
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "el-GR");
 
         voice.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("UseCompatLoadingForDrawables")
             @Override
             public void onClick(View view) {
-                if (voiceOn) {
-                    voiceOn = false;
+                if (!voiceOn) {
+                    voice.setImageDrawable(getDrawable(R.drawable.ic_baseline_mic));
                     speechRecognizer.startListening(speechRecognizerIntent);
+                    voiceOn=true;
+                }
+                else {
+                    voice.setImageDrawable(getDrawable(R.drawable.ic_baseline_mic_off));
+                    speechRecognizer.stopListening();
+                    voiceOn=false;
                 }
             }
         });
@@ -109,12 +116,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onEndOfSpeech() {
-                voice.setImageResource(R.drawable.ic_baseline_mic_off);
-                voicecom.setVisibility(View.VISIBLE);
-                date.setVisibility(View.INVISIBLE);
-                clock.setVisibility(View.INVISIBLE);
-                voiceOn = true;
-                speechRecognizer.stopListening();
+//                voice.setImageDrawable(getDrawable(R.drawable.ic_baseline_mic_off));
+//                voicecom.setVisibility(View.VISIBLE);
+//                date.setVisibility(View.INVISIBLE);
+//                clock.setVisibility(View.INVISIBLE);
+//                voiceOn = true;
+//                speechRecognizer.stopListening();
             }
 
             @Override
@@ -124,12 +131,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResults(Bundle results) {
-                voice.setImageResource(R.drawable.ic_baseline_mic);
+//                voice.setImageResource(R.drawable.ic_baseline_mic);
                 voicecom.setVisibility(View.GONE);
                 date.setVisibility(View.VISIBLE);
                 clock.setVisibility(View.VISIBLE);
-                ArrayList<String> data = results.getStringArrayList(speechRecognizer.RESULTS_RECOGNITION);
+//                ArrayList<String> data = results.getStringArrayList(speechRecognizer.RESULTS_RECOGNITION);
+//                voicecom.setText(data.get(0));
+                ArrayList<String> data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 voicecom.setText(data.get(0));
+
+
             }
 
             @Override
@@ -181,8 +192,11 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 1) {
-            if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "ΑΠΑΙΤΟΥΝΤΑΙ ΔΙΚΑΙΩΜΑΤΑ ΗΧΟΥ ΓΙΑ ΤΗΝ ΕΝΕΡΓΟΠΟΙΗΣΗ ΤΩΝ ΦΩΝΗΤΙΚΩΝ ΛΕΙΤΟΥΡΓΙΩΝ", Toast.LENGTH_LONG).show();
+            }
+            else {
+                Toast.makeText(this, "Permission Denied.", Toast.LENGTH_LONG).show();
             }
         }
     }
