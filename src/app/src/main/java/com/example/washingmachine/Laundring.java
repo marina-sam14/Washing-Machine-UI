@@ -140,7 +140,7 @@ public class Laundring extends AppCompatActivity {
                             Intent intent = new Intent(Laundring.this, Completed.class);
                             startActivity(intent);
                         }
-                    }else if (!pressedPaused) {
+                    } else if (!pressedPaused) {
                         try {
                             status = getStatus();
                             progressBar.setProgress(getStatus());
@@ -151,19 +151,8 @@ public class Laundring extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-                    else if (pressedCancel){
-                        try {
-                            status = getStatus();
-                            progressBar.setProgress(getStatus());
-                            if (status == 100) {
-                                Thread.currentThread().wait();
-                            }
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
 
+                }
 
 
             }
