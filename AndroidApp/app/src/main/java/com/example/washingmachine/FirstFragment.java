@@ -69,6 +69,15 @@ public class FirstFragment extends AppCompatActivity {
         clock.setText(currentTime);
 
 
+        ImageButton home = (ImageButton) findViewById(R.id.homepage);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FirstFragment.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

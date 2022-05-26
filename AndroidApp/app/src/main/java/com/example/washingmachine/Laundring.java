@@ -93,7 +93,7 @@ public class Laundring extends AppCompatActivity {
                     estimate.setText("ΕΚΤΙΜΩΜΕΝΟΣ ΧΡΟΝΟΣ ΟΛΟΚΛΗΡΩΣΗΣ: ΠΑΥΣΗ");
                     pauseBtn.setText("ΣΥΝΕΧΙΣΗ ΠΛΥΣΗΣ");
                     progressBar.setVisibility(View.INVISIBLE);
-                    pauseBtn.setBackgroundColor(Color.parseColor("#81c639"));
+                    pauseBtn.setBackgroundColor(Color.parseColor("#00A300"));
                     paused = true;
                     String text = getIntent().getStringExtra("WASH_TEXT");
                     int tot = getIntent().getIntExtra("TOTAL_TIME", 42);
