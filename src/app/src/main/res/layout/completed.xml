@@ -17,7 +17,7 @@
         android:layout_height="55dp"
         android:background="#313336"/>
 
-    <TextClock
+    <TextView
         android:id="@+id/clock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,9 +37,12 @@
         android:textColor="@color/white"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="@id/divider"
+        app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/divider" />
+        app:layout_constraintTop_toTopOf="@id/divider"
+        app:layout_constraintVertical_bias="0.0" />
+
 
 
     <ImageView

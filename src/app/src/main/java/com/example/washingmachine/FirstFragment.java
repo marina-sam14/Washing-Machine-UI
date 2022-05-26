@@ -31,6 +31,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class FirstFragment extends AppCompatActivity {
 
@@ -65,15 +67,17 @@ public class FirstFragment extends AppCompatActivity {
         TextView startTxt = (TextView) findViewById(R.id.next);
         ImageButton helper = (ImageButton) findViewById(R.id.helper);
 
-        TextView date = (TextView) findViewById(R.id.date);
+        TextView date = findViewById(R.id.date);
+        TextView clock = findViewById(R.id.clock);
+
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         String dateTime = simpleDateFormat.format(calendar.getTime()).toString();
         date.setText(dateTime);
 
-        TextView tClock = (TextView) findViewById(R.id.clock);
-        String clock = tClock.getText().toString();
-        tClock.setText(clock);
+        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+        clock.setText(currentTime);
+
 
         favorite.setOnClickListener(new View.OnClickListener() {
             @Override

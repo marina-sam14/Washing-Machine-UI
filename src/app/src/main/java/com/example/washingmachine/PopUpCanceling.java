@@ -16,6 +16,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class PopUpCanceling extends AppCompatActivity {
     boolean returnexists = false;
@@ -35,15 +37,16 @@ public class PopUpCanceling extends AppCompatActivity {
         ImageView image = (ImageView) findViewById(R.id.imageView3);
         TextView txt = (TextView) findViewById(R.id.text);
 
-        TextView date = (TextView) findViewById(R.id.date);
+        TextView date = findViewById(R.id.date);
+        TextView clock = findViewById(R.id.clock);
+
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         String dateTime = simpleDateFormat.format(calendar.getTime()).toString();
         date.setText(dateTime);
 
-        TextView tClock = (TextView) findViewById(R.id.clock);
-        String clock = tClock.getText().toString();
-        tClock.setText(clock);
+        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+        clock.setText(currentTime);
 
         continued.setOnClickListener(new View.OnClickListener() {
             @Override

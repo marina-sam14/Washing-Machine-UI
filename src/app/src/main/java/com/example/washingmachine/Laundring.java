@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class Laundring extends AppCompatActivity {
 
@@ -29,8 +31,6 @@ public class Laundring extends AppCompatActivity {
     boolean pressedContinue = false;
 
 
-
-
     protected void onCreate(Bundle savedInstanceState) {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -39,25 +39,26 @@ public class Laundring extends AppCompatActivity {
         setContentView(R.layout.laundrying);
 
 
-        String text = getIntent().getStringExtra("WASH_TEXT");
         int tot = getIntent().getIntExtra("TOTAL_TIME", 42);
 
         TextView workTxt = (TextView) findViewById(R.id.working);
         TextView info = (TextView) findViewById(R.id.info);
-        info.setText(text);
+
         TextView estimate = (TextView) findViewById(R.id.remainder);
         String finalTxt = "ΕΚΤΙΜΩΜΕΝΟΣ ΧΡΟΝΟΣ ΟΛΟΚΛΗΡΩΣΗΣ: " + tot + "'";
         estimate.setText(finalTxt);
 
-        TextView date = (TextView) findViewById(R.id.date);
+
+        TextView date = findViewById(R.id.date);
+        TextView clock = findViewById(R.id.clock);
+
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         String dateTime = simpleDateFormat.format(calendar.getTime()).toString();
         date.setText(dateTime);
 
-        TextView tClock = (TextView) findViewById(R.id.clock);
-        String clock = tClock.getText().toString();
-        tClock.setText(clock);
+        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+        clock.setText(currentTime);
 
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.getProgressDrawable().setColorFilter(
