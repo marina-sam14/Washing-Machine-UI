@@ -52,6 +52,8 @@ public class PopUpCanceling extends AppCompatActivity {
                 } else {
                     Intent intent = new Intent(PopUpCanceling.this, Laundring.class);
                     startActivity(intent);
+//                    intent.putExtra("WASH_TEXT", text);
+//                    intent.putExtra("TOTAL_TIME", tot);
                 }
             }
         });

@@ -25,6 +25,8 @@ public class Laundring extends AppCompatActivity {
     private int status=0;
     Handler handler = new Handler();
     boolean pressedCancel = false;
+    boolean pressedPaused = false;
+    boolean pressedContinue = false;
 
 
 
@@ -71,7 +73,8 @@ public class Laundring extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (paused) {
-
+                    pressedPaused=true;
+                    pressedContinue=false;
                     SpannableString content = new SpannableString("ΛΕΙΤΟΥΡΓΙΑ");
                     content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
                     workTxt.setText(content);
@@ -83,7 +86,8 @@ public class Laundring extends AppCompatActivity {
 
 
                 } else {
-
+                    pressedPaused=false;
+                    pressedContinue=true;
                     SpannableString content = new SpannableString("ΠΑΥΣΗ");
                     content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
                     workTxt.setText(content);
@@ -120,18 +124,30 @@ public class Laundring extends AppCompatActivity {
             @Override
             public void run() {
                 while (status < 100 && !pressedCancel) {
-                    status++;
-                    android.os.SystemClock.sleep(500);
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressBar.setProgress(status);
+                    if (!pressedContinue) {
+                        status++;
+                        android.os.SystemClock.sleep(50);
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressBar.setProgress(status);
 
+                            }
+                        });
+                        if (status == 100) {
+                            Intent intent = new Intent(Laundring.this, Completed.class);
+                            startActivity(intent);
                         }
-                    });
-                    if (status==100){
-                        Intent intent=new Intent(Laundring.this,Completed.class);
-                        startActivity(intent);
+                    }else if (!pressedPaused) {
+                        try {
+                            status = getStatus();
+                            progressBar.setProgress(getStatus());
+                            if (status == 100) {
+                                Thread.currentThread().wait();
+                            }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
 
@@ -146,5 +162,9 @@ public class Laundring extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         // Do Here what ever you want do on back press;
+    }
+
+    public int getStatus(){
+        return status;
     }
 }
