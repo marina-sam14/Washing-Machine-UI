@@ -8,39 +8,6 @@
     tools:context=".FirstFragment">
 
 
-    <TextClock
-        android:id="@+id/clock"
-        android:layout_width="wrap_content"
-        android:layout_height="64dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="568dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="378dp"
-        android:format24Hour="hh:mm:ss"
-        android:gravity="end"
-        android:padding="20dp"
-        android:textSize="25sp" />
-
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="348dp"
-        android:layout_height="39dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-
-        android:layout_marginStart="-3dp"
-        android:layout_marginTop="-3dp"
-        android:layout_marginEnd="540dp"
-        android:layout_marginBottom="412dp"
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="134dp"
@@ -48,8 +15,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="398dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="420dp"
+        android:layout_marginTop="40dp"
         app:srcCompat="@drawable/info" />
 
     <TextView
@@ -60,9 +27,9 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="220dp"
-        android:layout_marginTop="119dp"
-        android:layout_marginBottom="309dp"
+        android:layout_marginStart="247dp"
+        android:layout_marginTop="162dp"
+        android:layout_marginBottom="266dp"
         android:text="@string/advices"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -79,9 +46,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="530dp"
-        android:layout_marginTop="186dp"
+        android:layout_marginTop="243dp"
         android:layout_marginEnd="322dp"
-        android:layout_marginBottom="242dp"
+        android:layout_marginBottom="185dp"
         android:text="@string/in_60"
         android:textAlignment="center"
         android:textColor="#033145"
@@ -97,10 +64,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="764dp"
-        android:layout_marginTop="183dp"
-        android:layout_marginEnd="88dp"
-        android:layout_marginBottom="245dp"
+        android:layout_marginStart="755dp"
+        android:layout_marginTop="244dp"
+        android:layout_marginEnd="97dp"
+        android:layout_marginBottom="184dp"
         android:text="@string/in_90"
         android:textAlignment="center"
         android:textColor="#033145"
@@ -117,9 +84,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="185dp"
+        android:layout_marginTop="248dp"
         android:layout_marginEnd="780dp"
-        android:layout_marginBottom="256dp"
+        android:layout_marginBottom="193dp"
         android:text="@string/in_30"
         android:textAlignment="center"
         android:textColor="#033145"
@@ -135,10 +102,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="253dp"
-        android:layout_marginTop="184dp"
-        android:layout_marginEnd="557dp"
-        android:layout_marginBottom="258dp"
+        android:layout_marginStart="255dp"
+        android:layout_marginTop="243dp"
+        android:layout_marginEnd="555dp"
+        android:layout_marginBottom="199dp"
         android:text="@string/in_40"
         android:textAlignment="center"
         android:textColor="#033145"
@@ -153,10 +120,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="224dp"
-        android:layout_marginEnd="787dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="344dp"
+        android:layout_marginEnd="785dp"
+        android:layout_marginBottom="-110dp"
         android:text="@string/text_30" />
 
     <TextView
@@ -167,10 +134,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="275dp"
-        android:layout_marginTop="224dp"
-        android:layout_marginEnd="540dp"
-        android:layout_marginBottom="45dp"
+        android:layout_marginStart="277dp"
+        android:layout_marginTop="350dp"
+        android:layout_marginEnd="538dp"
+        android:layout_marginBottom="-81dp"
         android:text="@string/text_40" />
 
     <TextView
@@ -181,10 +148,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="550dp"
-        android:layout_marginTop="224dp"
-        android:layout_marginEnd="314dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginStart="546dp"
+        android:layout_marginTop="348dp"
+        android:layout_marginEnd="318dp"
+        android:layout_marginBottom="-92dp"
         android:text="@string/text_60" />
 
     <TextView
@@ -195,10 +162,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="792dp"
-        android:layout_marginTop="223dp"
-        android:layout_marginEnd="73dp"
-        android:layout_marginBottom="33dp"
+        android:layout_marginStart="773dp"
+        android:layout_marginTop="347dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="-91dp"
         android:text="@string/text_90" />
 
     <ImageButton
@@ -207,9 +174,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="22dp"
         android:backgroundTint="#8dc2e3"
         app:srcCompat="@drawable/exit" />
+
+    <ImageButton
+        android:id="@+id/homepage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="31dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#8dc2e3"
+        app:layout_constraintHorizontal_bias="0.164"
+        app:srcCompat="@drawable/home" />
+
 
 </RelativeLayout>
