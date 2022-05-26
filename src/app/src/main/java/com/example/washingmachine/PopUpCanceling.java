@@ -30,6 +30,7 @@ public class PopUpCanceling extends AppCompatActivity {
         setContentView(R.layout.popup_cancel);
 
         int tot = getIntent().getIntExtra("TOTAL_TIME", 42);
+        int status = getIntent().getIntExtra("TOTAL_PROGRESS", 5);
 
         Button continued = (Button) findViewById(R.id.continued);
         Button cancel = (Button) findViewById(R.id.door);
@@ -57,6 +58,7 @@ public class PopUpCanceling extends AppCompatActivity {
                 } else {
                     Intent intent = new Intent(PopUpCanceling.this, Laundring.class);
                     intent.putExtra("TOTAL_TIME", tot);
+                    intent.putExtra("TOTAL_PROGRESS", status);
                     startActivity(intent);
                 }
             }

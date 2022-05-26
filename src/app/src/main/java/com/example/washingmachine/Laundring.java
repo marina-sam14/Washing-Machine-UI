@@ -24,7 +24,7 @@ import java.util.Locale;
 public class Laundring extends AppCompatActivity {
 
     boolean paused = false;
-    private int status=0;
+    private int status;
     Handler handler = new Handler();
     boolean pressedCancel = false;
     boolean pressedPaused = false;
@@ -38,8 +38,8 @@ public class Laundring extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.laundrying);
 
-
         int tot = getIntent().getIntExtra("TOTAL_TIME", 42);
+        status = getIntent().getIntExtra("TOTAL_PROGRESS", 5);
 
         TextView workTxt = (TextView) findViewById(R.id.working);
         TextView info = (TextView) findViewById(R.id.info);
@@ -61,8 +61,7 @@ public class Laundring extends AppCompatActivity {
         clock.setText(currentTime);
 
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        progressBar.getProgressDrawable().setColorFilter(
-                Color.BLACK, android.graphics.PorterDuff.Mode.SRC_IN);
+        progressBar.getProgressDrawable().setColorFilter(Color.BLACK, android.graphics.PorterDuff.Mode.SRC_IN);
         progressBar.getLayoutParams().height = 200;
 //        progressBar.invalidate();
         Button pauseBtn = (Button) findViewById(R.id.continued);
@@ -74,8 +73,8 @@ public class Laundring extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (paused) {
-                    pressedPaused=true;
-                    pressedContinue=false;
+                    pressedPaused=false;
+                    pressedContinue=true;
                     SpannableString content = new SpannableString("ΛΕΙΤΟΥΡΓΙΑ");
                     content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
                     workTxt.setText(content);
@@ -83,31 +82,24 @@ public class Laundring extends AppCompatActivity {
                     pauseBtn.setText("ΠΑΥΣΗ");
                     progressBar.setVisibility(View.VISIBLE);
                     pauseBtn.setBackgroundColor(Color.GRAY);
-
-
+                    paused = false;
 
                 } else {
-                    pressedPaused=false;
-                    pressedContinue=true;
+                    pressedPaused=true;
+                    pressedContinue=false;
                     SpannableString content = new SpannableString("ΠΑΥΣΗ");
                     content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
                     workTxt.setText(content);
                     estimate.setText("ΕΚΤΙΜΩΜΕΝΟΣ ΧΡΟΝΟΣ ΟΛΟΚΛΗΡΩΣΗΣ: ΠΑΥΣΗ");
                     pauseBtn.setText("ΣΥΝΕΧΙΣΗ ΠΛΥΣΗΣ");
-//                    animator.pause();
                     progressBar.setVisibility(View.INVISIBLE);
                     pauseBtn.setBackgroundColor(Color.parseColor("#81c639"));
                     paused = true;
                     String text = getIntent().getStringExtra("WASH_TEXT");
                     int tot = getIntent().getIntExtra("TOTAL_TIME", 42);
-
                 }
             }
         });
-
-
-
-
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,10 +107,8 @@ public class Laundring extends AppCompatActivity {
                 pressedCancel=true;
                 Intent intent = new Intent(Laundring.this, PopUpCanceling.class);
                 intent.putExtra("TOTAL_TIME", tot);
+                intent.putExtra("TOTAL_PROGRESS", progressBar.getProgress());
                 startActivity(intent);
-
-
-
             }
         });
 
@@ -126,37 +116,23 @@ public class Laundring extends AppCompatActivity {
             @Override
             public void run() {
                 while (status < 100 && !pressedCancel) {
-                    if (!pressedContinue) {
-                        status++;
-                        android.os.SystemClock.sleep(50);
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                progressBar.setProgress(status);
-
-                            }
-                        });
-                        if (status == 100) {
-                            Intent intent = new Intent(Laundring.this, Completed.class);
-                            startActivity(intent);
+                    status++;
+                    android.os.SystemClock.sleep(50);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBar.setProgress(status);
                         }
-                    } else if (!pressedPaused) {
-                        try {
-                            status = getStatus();
-                            progressBar.setProgress(getStatus());
-                            if (status == 100) {
-                                Thread.currentThread().wait();
-                            }
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                    });
+                    if (status == 100) {
+                        Intent intent = new Intent(Laundring.this, Completed.class);
+                        startActivity(intent);
                     }
-
+                    while (pressedPaused) {
+                        progressBar.setProgress(progressBar.getProgress());
+                    }
                 }
-
-
             }
-
         });
         thread.start();
     }
