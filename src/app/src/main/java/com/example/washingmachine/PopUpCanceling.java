@@ -27,6 +27,8 @@ public class PopUpCanceling extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.popup_cancel);
 
+        int tot = getIntent().getIntExtra("TOTAL_TIME", 42);
+
         Button continued = (Button) findViewById(R.id.continued);
         Button cancel = (Button) findViewById(R.id.door);
 
@@ -51,9 +53,8 @@ public class PopUpCanceling extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(PopUpCanceling.this, Laundring.class);
+                    intent.putExtra("TOTAL_TIME", tot);
                     startActivity(intent);
-//                    intent.putExtra("WASH_TEXT", text);
-//                    intent.putExtra("TOTAL_TIME", tot);
                 }
             }
         });

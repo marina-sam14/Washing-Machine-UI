@@ -113,8 +113,9 @@ public class Laundring extends AppCompatActivity {
             public void onClick(View v) {
                 pressedCancel=true;
                 Intent intent = new Intent(Laundring.this, PopUpCanceling.class);
+                intent.putExtra("TOTAL_TIME", tot);
                 startActivity(intent);
-//                Thread.interrupted();
+
 
 
             }
@@ -139,6 +140,17 @@ public class Laundring extends AppCompatActivity {
                             startActivity(intent);
                         }
                     }else if (!pressedPaused) {
+                        try {
+                            status = getStatus();
+                            progressBar.setProgress(getStatus());
+                            if (status == 100) {
+                                Thread.currentThread().wait();
+                            }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else if (pressedCancel){
                         try {
                             status = getStatus();
                             progressBar.setProgress(getStatus());
