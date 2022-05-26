@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8dc2e3"
+    android:background="#848ccf "
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -73,7 +73,7 @@
         android:layout_width="270dp"
         android:layout_height="135dp"
         android:layout_marginTop="50dp"
-        android:backgroundTint="#03A80A"
+        android:backgroundTint="#05be70"
         android:text="@string/home_page"
         android:textSize="25sp"
         app:cornerRadius="30dp"

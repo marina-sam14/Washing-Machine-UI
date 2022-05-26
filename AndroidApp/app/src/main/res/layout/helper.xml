@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8dc2e3"
+    android:background="#848ccf "
     tools:context=".FirstFragment">
 
     <View
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@id/divider"
         app:layout_constraintRight_toLeftOf="@id/imageView5"
         android:layout_marginTop="70dp"
-        android:backgroundTint="#8dc2e3"
+        android:backgroundTint="#848ccf "
         app:srcCompat="@drawable/exit" />
 
     <ImageView

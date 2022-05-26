@@ -36,7 +36,7 @@ public class Laundring extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.laundrying);
+        setContentView(R.layout.washing);
 
         int tot = getIntent().getIntExtra("TOTAL_TIME", 42);
         status = getIntent().getIntExtra("TOTAL_PROGRESS", 5);

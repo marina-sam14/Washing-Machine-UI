@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8dc2e3"
+    android:background="#848ccf"
     tools:context=".MainActivity" >
 
     <View
@@ -51,14 +51,14 @@
         android:id="@+id/voice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#8dc2e3"
+        android:background="#848ccf "
         android:src="@drawable/ic_baseline_hearing_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/door"
         app:layout_constraintTop_toBottomOf="@id/divider"
         app:layout_constraintVertical_bias="0.86"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/programs"

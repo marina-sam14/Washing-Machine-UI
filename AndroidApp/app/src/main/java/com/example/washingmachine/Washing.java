@@ -103,7 +103,7 @@ public class Washing extends AppCompatActivity {
                     estimate.setText("ΕΚΤΙΜΩΜΕΝΟΣ ΧΡΟΝΟΣ ΟΛΟΚΛΗΡΩΣΗΣ: ΠΑΥΣΗ");
                     pauseBtn.setText("ΣΥΝΕΧΙΣΗ ΠΛΥΣΗΣ");
                     progressBar.setVisibility(View.INVISIBLE);
-                    pauseBtn.setBackgroundColor(Color.parseColor("#81c639"));
+                    pauseBtn.setBackgroundTintList(getResources().getColorStateList(R.color.myGreen));
                     paused = true;
                 }
             }

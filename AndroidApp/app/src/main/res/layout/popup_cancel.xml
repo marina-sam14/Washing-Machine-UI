@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8dc2e3"
+    android:background="#848ccf "
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -83,7 +83,7 @@
         app:layout_constraintTop_toBottomOf="@id/text"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@id/continued"
-        android:backgroundTint="#DC0E0E"
+        android:backgroundTint="#f14141"
         android:layout_marginTop="50dp"
         android:textSize="25sp"
         android:text="@string/cancelling"
