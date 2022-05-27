@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -71,8 +72,10 @@ public class FirstFragment extends AppCompatActivity {
 
         Button schedulingProgram = (Button) findViewById(R.id.scheduled);
         TextView datePicker = (TextView) findViewById(R.id.datePicker);
+        TextView timePicker = (TextView) findViewById(R.id.timePicker);
         TextView scheduled_start = (TextView) findViewById(R.id.scheduled_next);
         datePicker.setVisibility(View.INVISIBLE);
+        timePicker.setVisibility(View.INVISIBLE);
         scheduled_start.setVisibility(View.INVISIBLE);
 
         TextView date = findViewById(R.id.date);
@@ -407,6 +410,7 @@ public class FirstFragment extends AppCompatActivity {
                     String text = "ΚΑΝΟΝΙΚΟ 15' ΘΕΡΜΟΚΡΑΣΙΑ 30 ΞΕΒΓΑΛΜΑ ΣΤΥΨΙΜΟ";
                     int tot = 50;
                     datePicker.setVisibility(View.VISIBLE);
+                    timePicker.setVisibility(View.VISIBLE);
                     startTxt.setVisibility(View.INVISIBLE);
                     scheduled_start.setVisibility(View.VISIBLE);
                     schedulingProgram.setText("ΗΜΕΡΟΜΗΝΙΑ ΚΑΙ ΩΡΑ");
@@ -416,31 +420,33 @@ public class FirstFragment extends AppCompatActivity {
                     int month = mcurrentDate.get(Calendar.MONTH);
                     int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
 
+
                     DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
                         public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
-                            mselectedYear = selectedYear;
-                            mselectedMonth = selectedMonth;
-                            mselectedDay = selectedDay;
+                            // TODO Auto-generated method stub
+                            /*      Your code   to get date and time    */
                             Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
+                            datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" +  selectedDay + "/" + selectedMonth + "/" + selectedYear);
                         }
                     }, year, month, day);
+                    mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                    mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
+                    mDatePicker.show();
 
                     mHour = mcurrentDate.get(Calendar.HOUR_OF_DAY);
                     mMinute = mcurrentDate.get(Calendar.MINUTE);
 
-                    // Launch Time Picker Dialog
-                    TimePickerDialog timePickerDialog = new TimePickerDialog(FirstFragment.this, new TimePickerDialog.OnTimeSetListener() {
-                        @Override
-                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                            myHour = hourOfDay;
-                            myMinute = minute;
-                        }
-                    }, mHour, mMinute, false);
-                    timePickerDialog.show();
+                    TimePickerDialog timePickerDialog = new TimePickerDialog(FirstFragment.this,
+                            new TimePickerDialog.OnTimeSetListener() {
 
-                    datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" +  mselectedDay + "/" + mselectedMonth + "/" + mselectedYear + " ΚΑΙ ΩΡΑ:" + myHour + ":" + myMinute);
-                    mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
-                    mDatePicker.show();
+                                @Override
+                                public void onTimeSet(TimePicker view, int hourOfDay,
+                                                      int minute) {
+
+                                    timePicker.setText("ΚΑΙ ΩΡΑ " + hourOfDay + ":" + minute);
+                                }
+                            }, mHour, mMinute, false);
+                    timePickerDialog.show();
 
                     normalb = false;
                     lightb = false;
@@ -464,6 +470,7 @@ public class FirstFragment extends AppCompatActivity {
                             tot += 20;
                         }
                         datePicker.setVisibility(View.VISIBLE);
+                        timePicker.setVisibility(View.VISIBLE);
                         startTxt.setVisibility(View.INVISIBLE);
                         scheduled_start.setVisibility(View.VISIBLE);
                         schedulingProgram.setText("ΗΜΕΡΟΜΗΝΙΑ ΚΑΙ ΩΡΑ");
@@ -473,31 +480,34 @@ public class FirstFragment extends AppCompatActivity {
                         int month = mcurrentDate.get(Calendar.MONTH);
                         int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
 
+
                         DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
                             public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
-                                mselectedYear = selectedYear;
-                                mselectedMonth = selectedMonth;
-                                mselectedDay = selectedDay;
+                                // TODO Auto-generated method stub
+                                /*      Your code   to get date and time    */
                                 Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
+                                datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" +  selectedDay + "/" + selectedMonth + "/" + selectedYear);
                             }
                         }, year, month, day);
+                        mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                        mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
+                        mDatePicker.show();
 
                         mHour = mcurrentDate.get(Calendar.HOUR_OF_DAY);
                         mMinute = mcurrentDate.get(Calendar.MINUTE);
 
-                        // Launch Time Picker Dialog
-                        TimePickerDialog timePickerDialog = new TimePickerDialog(FirstFragment.this, new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                myHour = hourOfDay;
-                                myMinute = minute;
-                            }
-                        }, mHour, mMinute, false);
+                        TimePickerDialog timePickerDialog = new TimePickerDialog(FirstFragment.this,
+                                new TimePickerDialog.OnTimeSetListener() {
+
+                                    @Override
+                                    public void onTimeSet(TimePicker view, int hourOfDay,
+                                                          int minute) {
+
+                                        timePicker.setText("ΚΑΙ ΩΡΑ " + hourOfDay + ":" + minute);
+                                    }
+                                }, mHour, mMinute, false);
                         timePickerDialog.show();
 
-                        datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" +  mselectedDay + "/" + mselectedMonth + "/" + mselectedYear + " ΚΑΙ ΩΡΑ:" + myHour + ":" + myMinute);
-                        mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
-                        mDatePicker.show();
                         normalb = false;
                         lightb = false;
                         strongb = false;
@@ -520,6 +530,7 @@ public class FirstFragment extends AppCompatActivity {
                         }
 
                         datePicker.setVisibility(View.VISIBLE);
+                        timePicker.setVisibility(View.VISIBLE);
                         startTxt.setVisibility(View.INVISIBLE);
                         scheduled_start.setVisibility(View.VISIBLE);
                         schedulingProgram.setText("ΗΜΕΡΟΜΗΝΙΑ ΚΑΙ ΩΡΑ");
@@ -529,31 +540,34 @@ public class FirstFragment extends AppCompatActivity {
                         int month = mcurrentDate.get(Calendar.MONTH);
                         int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
 
+
                         DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
                             public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
-                                mselectedYear = selectedYear;
-                                mselectedMonth = selectedMonth;
-                                mselectedDay = selectedDay;
+                                // TODO Auto-generated method stub
+                                /*      Your code   to get date and time    */
                                 Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
+                                datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" +  selectedDay + "/" + selectedMonth + "/" + selectedYear);
                             }
                         }, year, month, day);
+                        mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                        mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
+                        mDatePicker.show();
 
                         mHour = mcurrentDate.get(Calendar.HOUR_OF_DAY);
                         mMinute = mcurrentDate.get(Calendar.MINUTE);
 
-                        // Launch Time Picker Dialog
-                        TimePickerDialog timePickerDialog = new TimePickerDialog(FirstFragment.this, new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                myHour = hourOfDay;
-                                myMinute = minute;
-                            }
-                        }, mHour, mMinute, false);
+                        TimePickerDialog timePickerDialog = new TimePickerDialog(FirstFragment.this,
+                                new TimePickerDialog.OnTimeSetListener() {
+
+                                    @Override
+                                    public void onTimeSet(TimePicker view, int hourOfDay,
+                                                          int minute) {
+
+                                        timePicker.setText("ΚΑΙ ΩΡΑ " + hourOfDay + ":" + minute);
+                                    }
+                                }, mHour, mMinute, false);
                         timePickerDialog.show();
 
-                        datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" +  mselectedDay + "/" + mselectedMonth + "/" + mselectedYear + " ΚΑΙ ΩΡΑ:" + myHour + ":" + myMinute);
-                        mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
-                        mDatePicker.show();
                         normalb = false;
                         lightb = false;
                         strongb = false;
@@ -575,6 +589,7 @@ public class FirstFragment extends AppCompatActivity {
                             tot += 20;
                         }
                         datePicker.setVisibility(View.VISIBLE);
+                        timePicker.setVisibility(View.VISIBLE);
                         startTxt.setVisibility(View.INVISIBLE);
                         scheduled_start.setVisibility(View.VISIBLE);
                         schedulingProgram.setText("ΗΜΕΡΟΜΗΝΙΑ ΚΑΙ ΩΡΑ");
@@ -584,31 +599,34 @@ public class FirstFragment extends AppCompatActivity {
                         int month = mcurrentDate.get(Calendar.MONTH);
                         int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
 
+
                         DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
                             public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
-                                mselectedYear = selectedYear;
-                                mselectedMonth = selectedMonth;
-                                mselectedDay = selectedDay;
+                                // TODO Auto-generated method stub
+                                /*      Your code   to get date and time    */
                                 Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
+                                datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" +  selectedDay + "/" + selectedMonth + "/" + selectedYear);
                             }
                         }, year, month, day);
+                        mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                        mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
+                        mDatePicker.show();
 
                         mHour = mcurrentDate.get(Calendar.HOUR_OF_DAY);
                         mMinute = mcurrentDate.get(Calendar.MINUTE);
 
-                        // Launch Time Picker Dialog
-                        TimePickerDialog timePickerDialog = new TimePickerDialog(FirstFragment.this, new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                myHour = hourOfDay;
-                                myMinute = minute;
-                            }
-                        }, mHour, mMinute, false);
+                        TimePickerDialog timePickerDialog = new TimePickerDialog(FirstFragment.this,
+                                new TimePickerDialog.OnTimeSetListener() {
+
+                                    @Override
+                                    public void onTimeSet(TimePicker view, int hourOfDay,
+                                                          int minute) {
+
+                                        timePicker.setText("ΚΑΙ ΩΡΑ " + hourOfDay + ":" + minute);
+                                    }
+                                }, mHour, mMinute, false);
                         timePickerDialog.show();
 
-                        datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" +  mselectedDay + "/" + mselectedMonth + "/" + mselectedYear + " ΚΑΙ ΩΡΑ:" + myHour + ":" + myMinute);
-                        mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
-                        mDatePicker.show();
                         normalb = false;
                         lightb = false;
                         strongb = false;
@@ -621,6 +639,7 @@ public class FirstFragment extends AppCompatActivity {
             }
 
         });
+
         scheduled_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
