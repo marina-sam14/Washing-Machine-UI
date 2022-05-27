@@ -43,6 +43,12 @@ public class MainActivity extends AppCompatActivity {
         ImageButton voice = findViewById(R.id.voice);
         TextView date = findViewById(R.id.date);
 
+        if (voiceOn) {
+            voice.setImageDrawable(getDrawable(R.drawable.ic_baseline_hearing_disabled_24));
+        } else {
+            voice.setImageDrawable(getDrawable(R.drawable.ic_baseline_hearing_24));
+        }
+
         voice.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("UseCompatLoadingForDrawables")
             @Override

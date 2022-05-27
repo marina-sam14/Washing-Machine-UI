@@ -182,9 +182,7 @@
         app:layout_constraintLeft_toRightOf="@id/firsttotal"
         app:layout_constraintRight_toLeftOf="@id/thirdtotal"
         app:layout_constraintTop_toBottomOf="@id/temp"
-        tools:ignore="DuplicateSpeakableTextCheck"
-
-        />
+        tools:ignore="DuplicateSpeakableTextCheck"/>
 
     <LinearLayout
         android:id="@+id/thirdtotal"
@@ -408,7 +406,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.727"
-            app:srcCompat="@drawable/home"
+            app:srcCompat="@drawable/ic_home"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <com.google.android.material.button.MaterialButton
@@ -417,7 +415,7 @@
             android:layout_height="125dp"
             android:layout_marginLeft="360dp"
             android:layout_marginTop="168dp"
-            android:backgroundTint="#C4918989"
+            android:backgroundTint="#073B42"
             android:text="@string/scheduling"
             android:textSize="25sp"
             app:cornerRadius="30dp"
@@ -448,27 +446,11 @@
         android:layout_height="68dp"
         android:layout_marginBottom="4dp"
         android:textColor="#E40C0C"
-        android:textSize="14sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/botcon"
-        app:layout_constraintHorizontal_bias="0.993"
-        app:layout_constraintLeft_toRightOf="@id/normfav"
-        app:layout_constraintRight_toLeftOf="@id/washfav"
-        tools:ignore="MissingConstraints" />
-
-    <TimePicker
-        android:id="@+id/timePicker"
-        android:layout_width="255dp"
-        android:layout_height="163dp"
-        android:layout_marginLeft="544dp"
-        android:layout_marginBottom="4dp"
-        android:backgroundTint="@color/black"
-        android:timePickerMode="spinner"
-        app:layout_constraintBottom_toTopOf="@id/botcon"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toRightOf="@id/tempfav"
-        app:layout_constraintRight_toLeftOf="@id/dryfav"
-        tools:ignore="MissingConstraints,NotSibling" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

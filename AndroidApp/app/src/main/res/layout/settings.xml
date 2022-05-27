@@ -16,7 +16,7 @@
         android:layout_height="55dp"
         android:background="#313336"/>
 
-    <TextView
+    <DigitalClock
         android:id="@+id/clock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.977"
-        app:srcCompat="@drawable/home"
+        app:srcCompat="@drawable/ic_home"
         tools:ignore="SpeakableTextPresentCheck" />
 
 
