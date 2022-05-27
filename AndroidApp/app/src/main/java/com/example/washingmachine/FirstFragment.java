@@ -1,17 +1,23 @@
 package com.example.washingmachine;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,6 +34,7 @@ public class FirstFragment extends AppCompatActivity {
     boolean normalb = false;
     boolean lightb = false;
     boolean strongb = false;
+    boolean pressedSchedule = false;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -54,8 +61,18 @@ public class FirstFragment extends AppCompatActivity {
         CheckBox extra2 = (CheckBox) findViewById(R.id.washbtn);
 
         ImageButton start = (ImageButton) findViewById(R.id.nextbtn);
+        start.setVisibility(View.VISIBLE);
         TextView startTxt = (TextView) findViewById(R.id.next);
         ImageButton helper = (ImageButton) findViewById(R.id.helper);
+
+        Button schedulingProgram = (Button) findViewById(R.id.scheduled);
+        TextView datePicker = (TextView) findViewById(R.id.datePicker);
+        TimePicker timePicker=(TimePicker)findViewById(R.id.timePicker);
+        timePicker.setIs24HourView(true);
+        TextView scheduled_start = (TextView) findViewById(R.id.scheduled_next);
+        datePicker.setVisibility(View.INVISIBLE);
+        timePicker.setVisibility(View.INVISIBLE);
+        scheduled_start.setVisibility(View.INVISIBLE);
 
         TextView date = findViewById(R.id.date);
         TextView clock = findViewById(R.id.clock);
@@ -70,6 +87,7 @@ public class FirstFragment extends AppCompatActivity {
 
 
         ImageButton home = (ImageButton) findViewById(R.id.homepage);
+
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,6 +170,8 @@ public class FirstFragment extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
 
         startTxt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -264,7 +284,15 @@ public class FirstFragment extends AppCompatActivity {
                         music.start();
                     }
                     Snackbar.make(view, "ΠΡΕΠΕΙ ΝΑ ΕΠΙΛΕΞΕΤΕ ΠΡΟΓΡΑΜΜΑ ΓΙΑ ΝΑ ΞΕΚΙΝΗΣΕΤΕ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                } else if (favorite.isChecked()) {
+                }else if (pressedSchedule){
+                    if (voiceOn) {
+                        MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.successfully_scheduling);
+                        music.start();
+                    }
+                    Snackbar.make(view, "Η ΠΛΥΣΗ ΣΑΣ ΠΡΟΓΡΑΜΜΑΤΙΣΤΗΚΕ ΜΕ ΕΠΙΤΥΧΙΑ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
+                }
+                else if (favorite.isChecked()) {
                     String text = "ΚΑΝΟΝΙΚΟ 15' ΘΕΡΜΟΚΡΑΣΙΑ 30 ΞΕΒΓΑΛΜΑ ΣΤΥΨΙΜΟ";
                     int tot = 50;
                     Intent intent = new Intent(FirstFragment.this, Washing.class);
@@ -354,6 +382,225 @@ public class FirstFragment extends AppCompatActivity {
                         startActivity(intent);
                     }
                 }
+            }
+        });
+
+        schedulingProgram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pressedSchedule = true;
+                int hour, minute;
+                if (!normalb && !lightb && !strongb && !favorite.isChecked()) {
+                    if (voiceOn) {
+                        MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.select_program_to_start);
+                        music.start();
+                    }
+                    Snackbar.make(view, "ΠΡΕΠΕΙ ΝΑ ΕΠΙΛΕΞΕΤΕ ΠΡΟΓΡΑΜΜΑ ΓΙΑ ΝΑ ΞΕΚΙΝΗΣΕΤΕ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                } else if (favorite.isChecked()) {
+                    String text = "ΚΑΝΟΝΙΚΟ 15' ΘΕΡΜΟΚΡΑΣΙΑ 30 ΞΕΒΓΑΛΜΑ ΣΤΥΨΙΜΟ";
+                    int tot = 50;
+                    datePicker.setVisibility(View.VISIBLE);
+                    timePicker.setVisibility(View.VISIBLE);
+                    startTxt.setVisibility(View.INVISIBLE);
+                    scheduled_start.setVisibility(View.VISIBLE);
+                    schedulingProgram.setText("ΗΜΕΡΟΜΗΝΙΑ ΚΑΙ ΩΡΑ");
+                    schedulingProgram.setBackgroundColor(Color.BLACK);
+                    Calendar mcurrentDate = Calendar.getInstance();
+                    int year = mcurrentDate.get(Calendar.YEAR);
+                    int month = mcurrentDate.get(Calendar.MONTH);
+                    int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+
+                    hour = timePicker.getHour();
+                    minute = timePicker.getMinute();
+                    timePicker.setHour(hour);
+                    timePicker.setMinute(minute);
+
+                    DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
+                        public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
+                            // TODO Auto-generated method stub
+                            /*      Your code   to get date and time    */
+                            Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
+                            datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" +  selectedDay + "/" + selectedMonth + "/" + selectedYear + " ΚΑΙ ΩΡΑ:" + hour + ":" + minute);
+                        }
+                    }, year, month, day);
+                    mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
+                    mDatePicker.show();
+
+
+                    normalb = false;
+                    lightb = false;
+                    strongb = false;
+                    if (voiceOn) {
+                        MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.scheduling_date_time);
+                        music.start();
+                    }
+                }
+                else {
+                    if (normalb) {
+                        String text = "ΚΑΝΟΝΙΚΟ ";
+                        int tot = 15;
+                        text += spinnerTemperature.getSelectedItem().toString() + "'";
+                        if (extra1.isChecked()) {
+                            text += " ΣΤΥΨΙΜΟ";
+                            tot += 15;
+                        }
+                        if (extra2.isChecked()) {
+                            text += " ΞΕΒΓΑΛΜΑ";
+                            tot += 20;
+                        }
+                        datePicker.setVisibility(View.VISIBLE);
+                        timePicker.setVisibility(View.VISIBLE);
+                        startTxt.setVisibility(View.INVISIBLE);
+                        scheduled_start.setVisibility(View.VISIBLE);
+                        schedulingProgram.setText("ΗΜΕΡΟΜΗΝΙΑ ΚΑΙ ΩΡΑ");
+                        schedulingProgram.setBackgroundColor(Color.BLACK);
+                        Calendar mcurrentDate = Calendar.getInstance();
+                        int year = mcurrentDate.get(Calendar.YEAR);
+                        int month = mcurrentDate.get(Calendar.MONTH);
+                        int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+
+                        hour = timePicker.getHour();
+                        minute = timePicker.getMinute();
+                        timePicker.setHour(hour);
+                        timePicker.setMinute(minute);
+
+                        DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
+                            public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
+                                // TODO Auto-generated method stub
+                                /*      Your code   to get date and time    */
+                                Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
+                                datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" +  selectedDay + "/" + selectedMonth + "/" + selectedYear + " ΚΑΙ ΩΡΑ:" + hour + ":" + minute);
+                            }
+                        }, year, month, day);
+                        mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
+                        mDatePicker.show();
+                        normalb = false;
+                        lightb = false;
+                        strongb = false;
+                        if (voiceOn) {
+                            MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.scheduling_date_time);
+                            music.start();
+                        }
+                    }
+                    else if (lightb) {
+                        String text = "ΕΛΑΦΡΥ ";
+                        int tot = 60;
+                        text += spinnerTemperature.getSelectedItem().toString() + "'";
+                        if (extra1.isChecked()) {
+                            text += " ΣΤΥΨΙΜΟ";
+                            tot += 15;
+                        }
+                        if (extra2.isChecked()) {
+                            text += " ΞΕΒΓΑΛΜΑ";
+                            tot += 20;
+                        }
+
+                        datePicker.setVisibility(View.VISIBLE);
+                        timePicker.setVisibility(View.VISIBLE);
+                        startTxt.setVisibility(View.INVISIBLE);
+                        scheduled_start.setVisibility(View.VISIBLE);
+                        schedulingProgram.setText("ΗΜΕΡΟΜΗΝΙΑ ΚΑΙ ΩΡΑ");
+                        schedulingProgram.setBackgroundColor(Color.BLACK);
+                        Calendar mcurrentDate = Calendar.getInstance();
+                        int year = mcurrentDate.get(Calendar.YEAR);
+                        int month = mcurrentDate.get(Calendar.MONTH);
+                        int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+
+                        hour = timePicker.getHour();
+                        minute = timePicker.getMinute();
+                        timePicker.setHour(hour);
+                        timePicker.setMinute(minute);
+
+                        DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
+                            public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
+                                // TODO Auto-generated method stub
+                                /*      Your code   to get date and time    */
+                                Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
+                                datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" +  selectedDay + "/" + selectedMonth + "/" + selectedYear + " ΚΑΙ ΩΡΑ:" + hour + ":" + minute);
+                            }
+                        }, year, month, day);
+                        mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
+                        mDatePicker.show();
+                        normalb = false;
+                        lightb = false;
+                        strongb = false;
+                        if (voiceOn) {
+                            MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.scheduling_date_time);
+                            music.start();
+                        }
+                    }
+                    else if (strongb) {
+                        String text = "ΙΣΧΥΡΟ ";
+                        int tot = 60;
+                        text += spinnerTemperature.getSelectedItem().toString() + "'";
+                        if (extra1.isChecked()) {
+                            text += " ΣΤΥΨΙΜΟ";
+                            tot += 15;
+                        }
+                        if (extra2.isChecked()) {
+                            text += " ΞΕΒΓΑΛΜΑ";
+                            tot += 20;
+                        }
+//                        Intent intent = new Intent(FirstFragment.this, Washing.class);
+//                        intent.putExtra("WASH_TEXT", text);
+//                        intent.putExtra("TOTAL_TIME", tot);
+//                        normalb = false;
+//                        lightb = false;
+//                        strongb = false;
+//                        if (voiceOn) {
+//                            MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.starting_program);
+//                            music.start();
+//                        }
+//                        intent.putExtra("VOICE_ON", voiceOn);
+//                        startActivity(intent);
+                        datePicker.setVisibility(View.VISIBLE);
+                        timePicker.setVisibility(View.VISIBLE);
+                        startTxt.setVisibility(View.INVISIBLE);
+                        scheduled_start.setVisibility(View.VISIBLE);
+                        schedulingProgram.setText("ΗΜΕΡΟΜΗΝΙΑ ΚΑΙ ΩΡΑ");
+                        schedulingProgram.setBackgroundColor(Color.BLACK);
+                        Calendar mcurrentDate = Calendar.getInstance();
+                        int year = mcurrentDate.get(Calendar.YEAR);
+                        int month = mcurrentDate.get(Calendar.MONTH);
+                        int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+
+                        hour = timePicker.getHour();
+                        minute = timePicker.getMinute();
+                        timePicker.setHour(hour);
+                        timePicker.setMinute(minute);
+
+                        DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
+                            public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
+                                // TODO Auto-generated method stub
+                                /*      Your code   to get date and time    */
+                                Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
+                                datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" +  selectedDay + "/" + selectedMonth + "/" + selectedYear + " ΚΑΙ ΩΡΑ:" + hour + ":" + minute);
+                            }
+                        }, year, month, day);
+                        mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
+                        mDatePicker.show();
+                        normalb = false;
+                        lightb = false;
+                        strongb = false;
+                        if (voiceOn) {
+                            MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.scheduling_date_time);
+                            music.start();
+                        }
+                    }
+                }
+            }
+
+        });
+
+        scheduled_start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (voiceOn) {
+                    MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.successfully_scheduling);
+                    music.start();
+                }
+                Snackbar.make(view, "Η ΠΛΥΣΗ ΣΑΣ ΠΡΟΓΡΑΜΜΑΤΙΣΤΗΚΕ ΜΕ ΕΠΙΤΥΧΙΑ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
             }
         });
     }

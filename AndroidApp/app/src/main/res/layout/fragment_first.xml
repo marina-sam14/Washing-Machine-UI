@@ -263,7 +263,7 @@
         app:layout_constraintBottom_toTopOf="@id/favorite"
         android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="65dp"
         android:background="#313336"/>
 
     <TextView
@@ -360,7 +360,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_bias="0.784"
             app:srcCompat="@drawable/ic_questionmark"
             tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
 
@@ -376,13 +376,14 @@
             app:layout_constraintHorizontal_bias="0.895"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.693" />
 
         <ImageButton
             android:id="@+id/nextbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="20dp"
             android:backgroundTint="#848ccf "
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -390,7 +391,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_bias="0.784"
             app:srcCompat="@drawable/ic_next"
             tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
 
@@ -410,7 +411,64 @@
             app:srcCompat="@drawable/home"
             tools:ignore="SpeakableTextPresentCheck" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/scheduled"
+            android:layout_width="319dp"
+            android:layout_height="125dp"
+            android:layout_marginLeft="360dp"
+            android:layout_marginTop="168dp"
+            android:backgroundTint="#C4918989"
+            android:text="@string/scheduling"
+            android:textSize="25sp"
+            app:cornerRadius="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/favorite"
+            tools:ignore="NotSibling" />
+
+        <TextView
+            android:id="@+id/scheduled_next"
+            android:layout_width="163dp"
+            android:layout_height="50dp"
+            android:text="ΣΥΝΕΧΕΙΑ"
+            android:textColor="#0B0C0C"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.921"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.786" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/datePicker"
+        android:layout_width="502dp"
+        android:layout_height="68dp"
+        android:layout_marginBottom="4dp"
+        android:textColor="#E40C0C"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/botcon"
+        app:layout_constraintHorizontal_bias="0.993"
+        app:layout_constraintLeft_toRightOf="@id/normfav"
+        app:layout_constraintRight_toLeftOf="@id/washfav"
+        tools:ignore="MissingConstraints" />
+
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="255dp"
+        android:layout_height="163dp"
+        android:layout_marginLeft="544dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="@color/black"
+        android:timePickerMode="spinner"
+        app:layout_constraintBottom_toTopOf="@id/botcon"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toRightOf="@id/tempfav"
+        app:layout_constraintRight_toLeftOf="@id/dryfav"
+        tools:ignore="MissingConstraints,NotSibling" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -40,16 +40,19 @@ public class Washing extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.washing);
 
+        String text = getIntent().getStringExtra("WASH_TEXT");
         int tot = getIntent().getIntExtra("TOTAL_TIME", 42);
         status = getIntent().getIntExtra("TOTAL_PROGRESS", 5);
         voiceOn = getIntent().getBooleanExtra("VOICE_ON", false);
 
         TextView workTxt = (TextView) findViewById(R.id.working);
         TextView info = (TextView) findViewById(R.id.info);
+        info.setText(text);
 
         TextView estimate = (TextView) findViewById(R.id.remainder);
         String finalTxt = "ΕΚΤΙΜΩΜΕΝΟΣ ΧΡΟΝΟΣ ΟΛΟΚΛΗΡΩΣΗΣ: " + tot + "'";
         estimate.setText(finalTxt);
+
 
 
         TextView date = findViewById(R.id.date);
@@ -124,6 +127,8 @@ public class Washing extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
 
         Thread thread = new Thread(new Runnable() {
             @Override
