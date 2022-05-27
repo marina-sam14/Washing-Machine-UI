@@ -53,25 +53,18 @@ public class Washing extends AppCompatActivity {
         String finalTxt = "ΕΚΤΙΜΩΜΕΝΟΣ ΧΡΟΝΟΣ ΟΛΟΚΛΗΡΩΣΗΣ: " + tot + "'";
         estimate.setText(finalTxt);
 
-
-
         TextView date = findViewById(R.id.date);
-        TextView clock = findViewById(R.id.clock);
 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         String dateTime = simpleDateFormat.format(calendar.getTime()).toString();
         date.setText(dateTime);
 
-        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
-        clock.setText(currentTime);
-
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.getProgressDrawable().setColorFilter(Color.BLACK, android.graphics.PorterDuff.Mode.SRC_IN);
         progressBar.getLayoutParams().height = 200;
         Button pauseBtn = (Button) findViewById(R.id.continued);
         Button cancelBtn = (Button) findViewById(R.id.door);
-
 
         pauseBtn.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
@@ -82,8 +75,8 @@ public class Washing extends AppCompatActivity {
                         MediaPlayer music = MediaPlayer.create(Washing.this, R.raw.continue_wash);
                         music.start();
                     }
-                    pressedPaused=false;
-                    pressedContinue=true;
+                    pressedPaused = false;
+                    pressedContinue = true;
                     SpannableString content = new SpannableString("ΛΕΙΤΟΥΡΓΙΑ");
                     content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
                     workTxt.setText(content);
@@ -98,15 +91,15 @@ public class Washing extends AppCompatActivity {
                         MediaPlayer music = MediaPlayer.create(Washing.this, R.raw.pause_wash);
                         music.start();
                     }
-                    pressedPaused=true;
-                    pressedContinue=false;
+                    pressedPaused = true;
+                    pressedContinue = false;
                     SpannableString content = new SpannableString("ΠΑΥΣΗ");
                     content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
                     workTxt.setText(content);
                     estimate.setText("ΕΚΤΙΜΩΜΕΝΟΣ ΧΡΟΝΟΣ ΟΛΟΚΛΗΡΩΣΗΣ: ΠΑΥΣΗ");
                     pauseBtn.setText("ΣΥΝΕΧΙΣΗ ΠΛΥΣΗΣ");
                     progressBar.setVisibility(View.INVISIBLE);
-                    pauseBtn.setBackgroundTintList(getResources().getColorStateList(R.color.myGreen));
+                    pauseBtn.setBackgroundColor(Color.parseColor("#05be70"));
                     paused = true;
                 }
             }
