@@ -55,7 +55,7 @@ public class FirstFragment extends AppCompatActivity {
         voiceOn = getIntent().getBooleanExtra("VOICE_ON", false);
 
         Spinner spinnerTemperature = findViewById(R.id.spinner);
-        String[] list = {"30 °C", "40 °C", "50 °C", "60 °C"};
+        String[] list = {"30 °C", "40 °C", "60 °C", "90 °C"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, list);
         //adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerTemperature.setPrompt("ΕΠΙΛΟΓΗ ΘΕΡΜΟΚΡΑΣΙΑΣ");
