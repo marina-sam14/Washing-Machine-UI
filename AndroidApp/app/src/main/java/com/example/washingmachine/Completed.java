@@ -24,19 +24,19 @@ public class Completed extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
 
+        // Window without namebar
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.completed);
 
+//        Setting date and time in the divider
         TextView date = findViewById(R.id.date);
         TextView clock = findViewById(R.id.clock);
-
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         String dateTime = simpleDateFormat.format(calendar.getTime()).toString();
         date.setText(dateTime);
-
         String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
         clock.setText(currentTime);
 
@@ -50,6 +50,7 @@ public class Completed extends AppCompatActivity {
             music.start();
         }
 
+//        back to home page
         home_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,6 +64,7 @@ public class Completed extends AppCompatActivity {
             }
         });
 
+//        Button for the door to be opened
         door.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +79,7 @@ public class Completed extends AppCompatActivity {
         });
     }
 
+    //    We cannot use the back button that Android offers
     @Override
     public void onBackPressed() {
         // Do Here what ever you want do on back press;

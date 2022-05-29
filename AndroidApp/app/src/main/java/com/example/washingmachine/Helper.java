@@ -14,6 +14,7 @@ public class Helper extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
 
+//        Window without namebar
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         super.onCreate(savedInstanceState);
@@ -22,6 +23,7 @@ public class Helper extends AppCompatActivity {
 
         ImageButton exit = (ImageButton) findViewById(R.id.exit);
 
+//        X goes back to Program Choice menu
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

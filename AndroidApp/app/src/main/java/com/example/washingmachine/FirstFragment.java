@@ -46,6 +46,7 @@ public class FirstFragment extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
 
+        // Window without namebar
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         super.onCreate(savedInstanceState);
@@ -54,10 +55,10 @@ public class FirstFragment extends AppCompatActivity {
 
         voiceOn = getIntent().getBooleanExtra("VOICE_ON", false);
 
+//        Temperature degrees spinner
         Spinner spinnerTemperature = findViewById(R.id.spinner);
         String[] list = {"30 °C", "40 °C", "60 °C", "90 °C"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, list);
-        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerTemperature.setPrompt("ΕΠΙΛΟΓΗ ΘΕΡΜΟΚΡΑΣΙΑΣ");
         spinnerTemperature.setAdapter(adapter);
 
@@ -66,38 +67,43 @@ public class FirstFragment extends AppCompatActivity {
         RadioButton strong = findViewById(R.id.radio_strong);
 
         CheckBox favorite = findViewById(R.id.btnfav);
-
         CheckBox extra1 = findViewById(R.id.drybtn);
         CheckBox extra2 = findViewById(R.id.washbtn);
 
+//        Starting arrow image, visible when scheduling laundering is not enable
         ImageButton start = findViewById(R.id.nextbtn);
         start.setVisibility(View.VISIBLE);
+//        Next step text
         TextView startTxt = findViewById(R.id.next);
+
+//        Question mark image
         ImageButton helper = findViewById(R.id.helper);
 
+//        Setting Scheduling laundering
         Button schedulingProgram = findViewById(R.id.scheduled);
         TextView datePicker = findViewById(R.id.datePicker);
         TextView timePicker = findViewById(R.id.timePicker);
+//        Next step in Scheduling program
         TextView scheduled_start = findViewById(R.id.scheduled_next);
         TextView cancel_scheduled = findViewById(R.id.cancel_schedule);
+//        scheduling stuff is invisible by default until user decides to enable the feature
         datePicker.setVisibility(View.INVISIBLE);
         timePicker.setVisibility(View.INVISIBLE);
         scheduled_start.setVisibility(View.INVISIBLE);
         cancel_scheduled.setVisibility(View.INVISIBLE);
 
+        // Setting date and time in the divider
         TextView date = findViewById(R.id.date);
         TextView clock = findViewById(R.id.clock);
-
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         String dateTime = simpleDateFormat.format(calendar.getTime()).toString();
         date.setText(dateTime);
-
         String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
         clock.setText(currentTime);
 
+        // back to home page
         ImageButton home = (ImageButton) findViewById(R.id.homepage);
-
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,6 +117,7 @@ public class FirstFragment extends AppCompatActivity {
             }
         });
 
+//        favourite program is checked
         favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,15 +129,18 @@ public class FirstFragment extends AppCompatActivity {
                 // Check which checkbox was clicked
                 if (checked) {
                     Snackbar.make(v, "ΕΧΕΤΕ ΕΠΙΛΕΞΕΙ ΤΟ ΑΓΑΠΗΜΕΝΟ ΣΑΣ ΠΡΟΓΡΑΜΜΑ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+//                    when favourite is checked, all the other choices are not available
                     normal.setEnabled(false);
                     light.setEnabled(false);
                     strong.setEnabled(false);
                     extra1.setEnabled(false);
                     extra2.setEnabled(false);
+//                    other programs are disabled
                     normalb = false;
                     lightb = false;
                     strongb = false;
                 } else {
+//                    if favourite is not checked, other choices are available
                     normal.setEnabled(true);
                     light.setEnabled(true);
                     strong.setEnabled(true);
@@ -143,6 +153,7 @@ public class FirstFragment extends AppCompatActivity {
             }
         });
 
+//        dry option is selected
         extra1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,6 +169,7 @@ public class FirstFragment extends AppCompatActivity {
             }
         });
 
+//        extra wash option is checked
         extra2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,6 +185,7 @@ public class FirstFragment extends AppCompatActivity {
             }
         });
 
+//        helper is pressed
         helper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -187,20 +200,23 @@ public class FirstFragment extends AppCompatActivity {
         });
 
 
-
+//      starttxt is equal to next when Scheduling laundering is not checked
         startTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//               User has to choose a program for the laundering to start, otherwise a message warns them to choose one
                 if (!normalb && !lightb && !strongb && !favorite.isChecked()) {
                     if (voiceOn) {
                         MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.select_program_to_start);
                         music.start();
                     }
                     Snackbar.make(view, "ΠΡΕΠΕΙ ΝΑ ΕΠΙΛΕΞΕΤΕ ΠΡΟΓΡΑΜΜΑ ΓΙΑ ΝΑ ΞΕΚΙΝΗΣΕΤΕ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+//               favourite program is checked
                 } else if (favorite.isChecked()) {
                     String text = "ΚΑΝΟΝΙΚΟ 15' ΘΕΡΜΟΚΡΑΣΙΑ 30 ΞΕΒΓΑΛΜΑ ΣΤΥΨΙΜΟ";
                     int tot = 50;
                     Intent intent = new Intent(FirstFragment.this, Washing.class);
+                    // Sending  time,wash text for the Washing TextView user's program choices
                     intent.putExtra("WASH_TEXT", text);
                     intent.putExtra("TOTAL_TIME", tot);
                     normalb = false;
@@ -213,10 +229,13 @@ public class FirstFragment extends AppCompatActivity {
                     intent.putExtra("VOICE_ON", voiceOn);
                     startActivity(intent);
                 } else {
+//                    Normal program is checked
                     if (normalb) {
                         String text = "ΚΑΝΟΝΙΚΟ ";
                         int tot = 15;
+//                        Adding temperature degrees to the textview
                         text += spinnerTemperature.getSelectedItem().toString() + "'";
+//                        adding extra options to laundering and return the sum of the time duration of each choice
                         if (extra1.isChecked()) {
                             text += " ΣΤΥΨΙΜΟ";
                             tot += 15;
@@ -226,6 +245,7 @@ public class FirstFragment extends AppCompatActivity {
                             tot += 20;
                         }
                         Intent intent = new Intent(FirstFragment.this, Washing.class);
+//                        Sending information to the next fragment
                         intent.putExtra("WASH_TEXT", text);
                         intent.putExtra("TOTAL_TIME", tot);
                         normalb = false;
@@ -237,10 +257,13 @@ public class FirstFragment extends AppCompatActivity {
                         }
                         intent.putExtra("VOICE_ON", voiceOn);
                         startActivity(intent);
+//                        Light program is checked
                     } else if (lightb) {
                         String text = "ΕΛΑΦΡΥ ";
                         int tot = 60;
+                        // Adding temperature degrees to the textview
                         text += spinnerTemperature.getSelectedItem().toString() + "'";
+//                        adding extra options to laundering and return the sum of the time duration of each choice
                         if (extra1.isChecked()) {
                             text += " ΣΤΥΨΙΜΟ";
                             tot += 15;
@@ -250,6 +273,7 @@ public class FirstFragment extends AppCompatActivity {
                             tot += 20;
                         }
                         Intent intent = new Intent(FirstFragment.this, Washing.class);
+//                        Sending information to the next fragment
                         intent.putExtra("WASH_TEXT", text);
                         intent.putExtra("TOTAL_TIME", tot);
                         normalb = false;
@@ -261,10 +285,13 @@ public class FirstFragment extends AppCompatActivity {
                         }
                         intent.putExtra("VOICE_ON", voiceOn);
                         startActivity(intent);
+//                        strong program is checked
                     } else if (strongb) {
                         String text = "ΙΣΧΥΡΟ ";
                         int tot = 60;
+//                        Adding temperature degrees to the textview
                         text += spinnerTemperature.getSelectedItem().toString() + "'";
+//                        adding extra options to laundering and add the time duration of each choice
                         if (extra1.isChecked()) {
                             text += " ΣΤΥΨΙΜΟ";
                             tot += 15;
@@ -274,6 +301,7 @@ public class FirstFragment extends AppCompatActivity {
                             tot += 20;
                         }
                         Intent intent = new Intent(FirstFragment.this, Washing.class);
+//                        Sending information to the next fragment
                         intent.putExtra("WASH_TEXT", text);
                         intent.putExtra("TOTAL_TIME", tot);
                         normalb = false;
@@ -291,27 +319,33 @@ public class FirstFragment extends AppCompatActivity {
         });
 
 
-
+//      button for setting time and date to schedule the laundering
         schedulingProgram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                button is pressed
                 pressedSchedule=true;
                     int time[];
+                // User has to choose a program for the laundering to be scheduled, otherwise a message warns them to choose one
                     if (!normalb && !lightb && !strongb && !favorite.isChecked()) {
                         if (voiceOn) {
                             MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.select_program_to_start);
                             music.start();
                         }
                         Snackbar.make(view, "ΠΡΕΠΕΙ ΝΑ ΕΠΙΛΕΞΕΤΕ ΠΡΟΓΡΑΜΜΑ ΓΙΑ ΝΑ ΞΕΚΙΝΗΣΕΤΕ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                    } else if (favorite.isChecked()) {
-
+                    }
+//                    favourite program is selected
+                    else if (favorite.isChecked()) {
                         String text = "ΚΑΝΟΝΙΚΟ 15' ΘΕΡΜΟΚΡΑΣΙΑ 30 ΞΕΒΓΑΛΜΑ ΣΤΥΨΙΜΟ";
                         int tot = 50;
+//                       only scheduling stuff should be visible
                         datePicker.setVisibility(View.VISIBLE);
                         timePicker.setVisibility(View.VISIBLE);
                         startTxt.setVisibility(View.INVISIBLE);
                         scheduled_start.setVisibility(View.VISIBLE);
                         cancel_scheduled.setVisibility(View.VISIBLE);
+
+//                        setting DatePicker pop-up
                         Calendar mcurrentDate = Calendar.getInstance();
                         int year = mcurrentDate.get(Calendar.YEAR);
                         int month = mcurrentDate.get(Calendar.MONTH);
@@ -326,13 +360,14 @@ public class FirstFragment extends AppCompatActivity {
                                 datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" + selectedDay + "/" + selectedMonth + "/" + selectedYear);
                             }
                         }, year, month, day);
+//                      The first available date is today
                         mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                         mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
                         mDatePicker.show();
 
+                        // setting TimePicker pop-up
                         mHour = mcurrentDate.get(Calendar.HOUR_OF_DAY);
                         mMinute = mcurrentDate.get(Calendar.MINUTE);
-
                         TimePickerDialog timePickerDialog = new TimePickerDialog(FirstFragment.this,
                                 new TimePickerDialog.OnTimeSetListener() {
 
@@ -344,6 +379,7 @@ public class FirstFragment extends AppCompatActivity {
                                         timePicker.setText("ΚΑΙ ΩΡΑ " + hourOfDay + ":" + String.format("%02d", minute));
                                     }
                                 }, mHour, mMinute, false);
+//                        We had to hide the cancel button in order to make sure that the user will not be able to skip the TimePicker choice
                         timePickerDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                             @Override
                             public void onShow(DialogInterface dialog) {
@@ -352,8 +388,6 @@ public class FirstFragment extends AppCompatActivity {
                             }
                         });
                         timePickerDialog.show();
-
-
                         normalb = false;
                         lightb = false;
                         strongb = false;
@@ -362,10 +396,13 @@ public class FirstFragment extends AppCompatActivity {
                             music.start();
                         }
                     } else {
+//                        normal program is selected
                         if (normalb) {
                             String text = "ΚΑΝΟΝΙΚΟ ";
                             int tot = 15;
+//                            Adding temperature degrees to the textview
                             text += spinnerTemperature.getSelectedItem().toString() + "'";
+//                              adding extra options to laundering and return the sum of the time duration of each choice
                             if (extra1.isChecked()) {
                                 text += " ΣΤΥΨΙΜΟ";
                                 tot += 15;
@@ -374,11 +411,14 @@ public class FirstFragment extends AppCompatActivity {
                                 text += " ΞΕΒΓΑΛΜΑ";
                                 tot += 20;
                             }
+//                            only scheduling stuff should be visible
                             datePicker.setVisibility(View.VISIBLE);
                             timePicker.setVisibility(View.VISIBLE);
                             startTxt.setVisibility(View.INVISIBLE);
                             scheduled_start.setVisibility(View.VISIBLE);
                             cancel_scheduled.setVisibility(View.VISIBLE);
+
+//                            setting DatePicker pop-up
                             Calendar mcurrentDate = Calendar.getInstance();
                             int year = mcurrentDate.get(Calendar.YEAR);
                             int month = mcurrentDate.get(Calendar.MONTH);
@@ -393,13 +433,14 @@ public class FirstFragment extends AppCompatActivity {
                                     datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" + selectedDay + "/" + selectedMonth + "/" + selectedYear);
                                 }
                             }, year, month, day);
+//                            The first available date is today
                             mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                             mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
                             mDatePicker.show();
 
+//                            setting TimePicker pop-up
                             mHour = mcurrentDate.get(Calendar.HOUR_OF_DAY);
                             mMinute = mcurrentDate.get(Calendar.MINUTE);
-
                             TimePickerDialog timePickerDialog = new TimePickerDialog(FirstFragment.this,
                                     new TimePickerDialog.OnTimeSetListener() {
 
@@ -410,6 +451,8 @@ public class FirstFragment extends AppCompatActivity {
                                             timePicker.setText("ΚΑΙ ΩΡΑ " + hourOfDay + ":" + minute);
                                         }
                                     }, mHour, mMinute, false);
+
+//                            We had to hide the cancel button in order to make sure that the user will not be able to skip the TimePicker choice
                             timePickerDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                                 @Override
                                 public void onShow(DialogInterface dialog) {
@@ -426,10 +469,14 @@ public class FirstFragment extends AppCompatActivity {
                                 MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.scheduling_date_time);
                                 music.start();
                             }
-                        } else if (lightb) {
+                        }
+//                        light program is selected
+                        else if (lightb) {
                             String text = "ΕΛΑΦΡΥ ";
                             int tot = 60;
+//                          Adding temperature degrees to the textview
                             text += spinnerTemperature.getSelectedItem().toString() + "'";
+//                            adding extra options to laundering and return the sum of the time duration of each choice
                             if (extra1.isChecked()) {
                                 text += " ΣΤΥΨΙΜΟ";
                                 tot += 15;
@@ -439,11 +486,14 @@ public class FirstFragment extends AppCompatActivity {
                                 tot += 20;
                             }
 
+//                            only scheduling stuff should be visible
                             datePicker.setVisibility(View.VISIBLE);
                             timePicker.setVisibility(View.VISIBLE);
                             startTxt.setVisibility(View.INVISIBLE);
                             scheduled_start.setVisibility(View.VISIBLE);
                             cancel_scheduled.setVisibility(View.VISIBLE);
+
+//                            setting DatePicker pop-up
                             Calendar mcurrentDate = Calendar.getInstance();
                             int year = mcurrentDate.get(Calendar.YEAR);
                             int month = mcurrentDate.get(Calendar.MONTH);
@@ -458,10 +508,12 @@ public class FirstFragment extends AppCompatActivity {
                                     datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" + selectedDay + "/" + selectedMonth + "/" + selectedYear);
                                 }
                             }, year, month, day);
+//                            The first available date is today
                             mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                             mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
                             mDatePicker.show();
 
+//                            setting TimePicker pop-up
                             mHour = mcurrentDate.get(Calendar.HOUR_OF_DAY);
                             mMinute = mcurrentDate.get(Calendar.MINUTE);
 
@@ -477,6 +529,7 @@ public class FirstFragment extends AppCompatActivity {
                                     }, mHour, mMinute, false);
                             timePickerDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                                 @Override
+//                                We had to hide the cancel button in order to make sure that the user will not be able to skip the TimePicker choice
                                 public void onShow(DialogInterface dialog) {
                                     // This is hiding the "Cancel" button:
                                     timePickerDialog.getButton(Dialog.BUTTON_NEGATIVE).setVisibility(View.GONE);
@@ -492,9 +545,12 @@ public class FirstFragment extends AppCompatActivity {
                                 music.start();
                             }
                         } else if (strongb) {
+//                            strong program is selected
                             String text = "ΙΣΧΥΡΟ ";
                             int tot = 60;
+//                            Adding temperature degrees to the textview
                             text += spinnerTemperature.getSelectedItem().toString() + "'";
+//                              adding extra options to laundering and return the sum of the time duration of each choice
                             if (extra1.isChecked()) {
                                 text += " ΣΤΥΨΙΜΟ";
                                 tot += 15;
@@ -503,11 +559,15 @@ public class FirstFragment extends AppCompatActivity {
                                 text += " ΞΕΒΓΑΛΜΑ";
                                 tot += 20;
                             }
+
+//                            only scheduling stuff should be visible
                             datePicker.setVisibility(View.VISIBLE);
                             timePicker.setVisibility(View.VISIBLE);
                             startTxt.setVisibility(View.INVISIBLE);
                             scheduled_start.setVisibility(View.VISIBLE);
                             cancel_scheduled.setVisibility(View.VISIBLE);
+
+//                            setting DatePicker pop-up
                             Calendar mcurrentDate = Calendar.getInstance();
                             int year = mcurrentDate.get(Calendar.YEAR);
                             int month = mcurrentDate.get(Calendar.MONTH);
@@ -522,10 +582,12 @@ public class FirstFragment extends AppCompatActivity {
                                     datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" + selectedDay + "/" + selectedMonth + "/" + selectedYear);
                                 }
                             }, year, month, day);
+//                            The first available date is today
                             mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                             mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
                             mDatePicker.show();
 
+//                            setting TimePicker pop-up
                             mHour = mcurrentDate.get(Calendar.HOUR_OF_DAY);
                             mMinute = mcurrentDate.get(Calendar.MINUTE);
 
@@ -539,6 +601,8 @@ public class FirstFragment extends AppCompatActivity {
                                             timePicker.setText("ΚΑΙ ΩΡΑ " + hourOfDay + ":" + minute);
                                         }
                                     }, mHour, mMinute, false);
+
+//                            We had to hide the cancel button in order to make sure that the user will not be able to skip the TimePicker choice
                             timePickerDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                                 @Override
                                 public void onShow(DialogInterface dialog) {
@@ -564,6 +628,7 @@ public class FirstFragment extends AppCompatActivity {
 
         });
 
+//        Button for cancelling the scheduling laundering, visible only in scheduling mode
         cancel_scheduled.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -572,11 +637,13 @@ public class FirstFragment extends AppCompatActivity {
                     music.start();
                 }
                 Snackbar.make(view, "Η ΠΡΟΓΡΑΜΜΑΤΙΣΜΕΝΗ ΠΛΥΣΗ ΑΚΥΡΩΘΗΚΕ", Snackbar.LENGTH_INDEFINITE).setAction("Action", null).show();
+//                We do not change intent because after scheduling confirmation, a message is visible to the user
                 Intent intent = new Intent(FirstFragment.this, FirstFragment.class);
                 startActivity(intent);
             }
         });
 
+//        Scheduled start button, visible only in scheduling mode
         scheduled_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -585,15 +652,18 @@ public class FirstFragment extends AppCompatActivity {
                     music.start();
                 }
                 Snackbar.make(view, "Η ΠΛΥΣΗ ΣΑΣ ΠΡΟΓΡΑΜΜΑΤΙΣΤΗΚΕ ΜΕ ΕΠΙΤΥΧΙΑ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+//                We do not change intent because after scheduling confirmation, a message is visible to the user
 //                Intent intent = new Intent(FirstFragment.this, MainActivity.class);
 //                intent.putExtra("VOICE_ON", voiceOn);
 //                startActivity(intent);
             }
         });
 
+//        Starting laundering
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //  User has to choose a program for the laundering to start, otherwise a message warns them to choose one
                 if (!normalb && !lightb && !strongb && !favorite.isChecked()) {
                     if (voiceOn) {
                         MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.select_program_to_start);
@@ -601,6 +671,7 @@ public class FirstFragment extends AppCompatActivity {
                     }
                     Snackbar.make(view, "ΠΡΕΠΕΙ ΝΑ ΕΠΙΛΕΞΕΤΕ ΠΡΟΓΡΑΜΜΑ ΓΙΑ ΝΑ ΞΕΚΙΝΗΣΕΤΕ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 }else if (pressedSchedule){
+//                    button for scheduling laundering is pressed
                     if (voiceOn) {
                         MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.successfully_scheduling);
                         music.start();
@@ -609,9 +680,11 @@ public class FirstFragment extends AppCompatActivity {
 
                 }
                 else if (favorite.isChecked()) {
+//                    favourite program is selected
                     String text = "ΚΑΝΟΝΙΚΟ 15' ΘΕΡΜΟΚΡΑΣΙΑ 30 ΞΕΒΓΑΛΜΑ ΣΤΥΨΙΜΟ";
                     int tot = 50;
                     Intent intent = new Intent(FirstFragment.this, Washing.class);
+//                    Sending information to the next fragment
                     intent.putExtra("WASH_TEXT", text);
                     intent.putExtra("TOTAL_TIME", tot);
                     normalb = false;
@@ -625,9 +698,12 @@ public class FirstFragment extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     if (normalb) {
+//                        normal program is selected
                         String text = "ΚΑΝΟΝΙΚΟ ";
                         int tot = 15;
+//                        Adding temperature degrees to the textview
                         text += spinnerTemperature.getSelectedItem().toString() + "'";
+//                          adding extra options to laundering and return the sum of the time duration of each choice
                         if (extra1.isChecked()) {
                             text += " ΣΤΥΨΙΜΟ";
                             tot += 15;
@@ -637,6 +713,7 @@ public class FirstFragment extends AppCompatActivity {
                             tot += 20;
                         }
                         Intent intent = new Intent(FirstFragment.this, Washing.class);
+//                        Sending information to the next fragment
                         intent.putExtra("WASH_TEXT", text);
                         intent.putExtra("TOTAL_TIME", tot);
                         normalb = false;
@@ -649,9 +726,12 @@ public class FirstFragment extends AppCompatActivity {
                         intent.putExtra("VOICE_ON", voiceOn);
                         startActivity(intent);
                     } else if (lightb) {
+//                        light program is selected
                         String text = "ΕΛΑΦΡΥ ";
                         int tot = 60;
+//                        Adding temperature degrees to the textview
                         text += spinnerTemperature.getSelectedItem().toString() + "'";
+//                          adding extra options to laundering and return the sum of the time duration of each choice
                         if (extra1.isChecked()) {
                             text += " ΣΤΥΨΙΜΟ";
                             tot += 15;
@@ -661,6 +741,7 @@ public class FirstFragment extends AppCompatActivity {
                             tot += 20;
                         }
                         Intent intent = new Intent(FirstFragment.this, Washing.class);
+//                        Sending information to the next fragment
                         intent.putExtra("WASH_TEXT", text);
                         intent.putExtra("TOTAL_TIME", tot);
                         normalb = false;
@@ -673,9 +754,12 @@ public class FirstFragment extends AppCompatActivity {
                         intent.putExtra("VOICE_ON", voiceOn);
                         startActivity(intent);
                     } else if (strongb) {
+//                        strong program is selected
                         String text = "ΙΣΧΥΡΟ ";
                         int tot = 60;
+//                        Adding temperature degrees to the textview
                         text += spinnerTemperature.getSelectedItem().toString() + "'";
+//                          adding extra options to laundering and return the sum of the time duration of each choice
                         if (extra1.isChecked()) {
                             text += " ΣΤΥΨΙΜΟ";
                             tot += 15;
@@ -685,6 +769,7 @@ public class FirstFragment extends AppCompatActivity {
                             tot += 20;
                         }
                         Intent intent = new Intent(FirstFragment.this, Washing.class);
+//                        Sending information to the next fragment
                         intent.putExtra("WASH_TEXT", text);
                         intent.putExtra("TOTAL_TIME", tot);
                         normalb = false;
@@ -703,6 +788,7 @@ public class FirstFragment extends AppCompatActivity {
 
     }
 
+//   Function where the appropriate sound is sounded based on what program is selected
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
@@ -742,22 +828,8 @@ public class FirstFragment extends AppCompatActivity {
         }
     }
 
-    public int[] popTimePicker(View view) {
-        int[] time = {};
-        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                time[0] = selectedHour;
-                time[1] = selectedMinute;
-            }
-        };
-        int style = AlertDialog.THEME_HOLO_DARK;
-        //TimePickerDialog timePickerDialog = new TimePickerDialog(this, style, onTimeSetListener, time[0], time[1], true);
-        //timePickerDialog.setTitle("Select Time");
-        //timePickerDialog.show();
-        return time;
-    }
 
+//  We cannot use the back button that Android offers
     @Override
     public void onBackPressed() {
         // Do Here what ever you want do on back press;

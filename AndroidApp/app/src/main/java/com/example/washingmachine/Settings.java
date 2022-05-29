@@ -22,6 +22,7 @@ public class Settings extends AppCompatActivity {
     boolean voiceOn;
 
     protected void onCreate(Bundle savedInstanceState) {
+       // Window without namebar
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
@@ -31,11 +32,13 @@ public class Settings extends AppCompatActivity {
 
         TextView date = findViewById(R.id.date);
 
+//        Setting date and time in the divider
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         String dateTime = simpleDateFormat.format(calendar.getTime()).toString();
         date.setText(dateTime);
 
+//        back to home page
         ImageButton home = (ImageButton) findViewById(R.id.homepage);
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +54,7 @@ public class Settings extends AppCompatActivity {
         });
     }
     @Override
+//    We cannot use the back button that Android offers
     public void onBackPressed() {
         // Do Here what ever you want do on back press;
     }

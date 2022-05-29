@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        // Window without namebar
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton voice = findViewById(R.id.voice);
         TextView date = findViewById(R.id.date);
 
+//        if voiceOn=true, then the icon without the line
         if (voiceOn) {
             voice.setImageDrawable(getDrawable(R.drawable.ic_baseline_voice_over_off_24));
         } else {
@@ -88,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        Button to settings
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        Button for the door to be opened
         door.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        Setting date and time in the divider
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         String dateTime = simpleDateFormat.format(calendar.getTime()).toString();

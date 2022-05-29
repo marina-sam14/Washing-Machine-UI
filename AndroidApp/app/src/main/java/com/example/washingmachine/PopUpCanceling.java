@@ -27,24 +27,25 @@ public class PopUpCanceling extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
 
+        // Window without namebar
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.popup_cancel);
 
+//        Receiving variables from the Washing class, time,wash text and voice message
         voiceOn = getIntent().getBooleanExtra("VOICE_ON", false);
         int tot = getIntent().getIntExtra("TOTAL_TIME", 42);
         int status = getIntent().getIntExtra("TOTAL_PROGRESS", 5);
 
         Button continued = (Button) findViewById(R.id.continued);
         Button cancel = (Button) findViewById(R.id.door);
-
         ImageView image = (ImageView) findViewById(R.id.imageView3);
         TextView txt = (TextView) findViewById(R.id.text);
-
         TextView date = findViewById(R.id.date);
         TextView clock = findViewById(R.id.clock);
 
+        // Setting date and time in the divider
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         String dateTime = simpleDateFormat.format(calendar.getTime()).toString();
@@ -53,6 +54,7 @@ public class PopUpCanceling extends AppCompatActivity {
         String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
         clock.setText(currentTime);
 
+//        Back to washing fragment button
         continued.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +71,7 @@ public class PopUpCanceling extends AppCompatActivity {
                         music.start();
                     }
                     Intent intent = new Intent(PopUpCanceling.this, Washing.class);
+//                    When we return to previous fragment, time and progress bar should be in the same spot as it was before
                     intent.putExtra("TOTAL_TIME", tot);
                     intent.putExtra("TOTAL_PROGRESS", status);
                     intent.putExtra("VOICE_ON", voiceOn);
@@ -77,9 +80,11 @@ public class PopUpCanceling extends AppCompatActivity {
             }
         });
 
+//        Canceling washing
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Button for the door to be opened
                 if (openexists) {
                     if (voiceOn) {
                         MediaPlayer music = MediaPlayer.create(PopUpCanceling.this, R.raw.opening_door);
@@ -93,6 +98,7 @@ public class PopUpCanceling extends AppCompatActivity {
                         MediaPlayer music = MediaPlayer.create(PopUpCanceling.this, R.raw.cancel_wash);
                         music.start();
                     }
+//                    Confirmation message for the cancelled laundering
                     txt.setText("Η ΠΛΥΣΗ ΑΚΥΡΩΘΗΚΕ ΜΕ ΕΠΙΤΥΧΙΑ");
                     image.setImageResource(R.drawable.ic_wrong);
                     continued.setText("ΕΠΙΣΤΡΟΦΗ ΣΤΗΝ ΑΡΧΗ");
@@ -106,6 +112,7 @@ public class PopUpCanceling extends AppCompatActivity {
         });
     }
     @Override
+//    We cannot use the back button that Android offers
     public void onBackPressed() {
         // Do Here what ever you want do on back press;
     }
