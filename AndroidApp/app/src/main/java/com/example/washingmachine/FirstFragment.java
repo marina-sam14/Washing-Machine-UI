@@ -1,8 +1,11 @@
 package com.example.washingmachine;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
@@ -76,9 +79,11 @@ public class FirstFragment extends AppCompatActivity {
         TextView datePicker = findViewById(R.id.datePicker);
         TextView timePicker = findViewById(R.id.timePicker);
         TextView scheduled_start = findViewById(R.id.scheduled_next);
+        TextView cancel_scheduled = findViewById(R.id.cancel_schedule);
         datePicker.setVisibility(View.INVISIBLE);
         timePicker.setVisibility(View.INVISIBLE);
         scheduled_start.setVisibility(View.INVISIBLE);
+        cancel_scheduled.setVisibility(View.INVISIBLE);
 
         TextView date = findViewById(R.id.date);
         TextView clock = findViewById(R.id.clock);
@@ -399,247 +404,285 @@ public class FirstFragment extends AppCompatActivity {
         schedulingProgram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pressedSchedule = true;
-                int time[];
-                if (!normalb && !lightb && !strongb && !favorite.isChecked()) {
-                    if (voiceOn) {
-                        MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.select_program_to_start);
-                        music.start();
-                    }
-                    Snackbar.make(view, "ΠΡΕΠΕΙ ΝΑ ΕΠΙΛΕΞΕΤΕ ΠΡΟΓΡΑΜΜΑ ΓΙΑ ΝΑ ΞΕΚΙΝΗΣΕΤΕ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                } else if (favorite.isChecked()) {
-
-                    String text = "ΚΑΝΟΝΙΚΟ 15' ΘΕΡΜΟΚΡΑΣΙΑ 30 ΞΕΒΓΑΛΜΑ ΣΤΥΨΙΜΟ";
-                    int tot = 50;
-                    datePicker.setVisibility(View.VISIBLE);
-                    timePicker.setVisibility(View.VISIBLE);
-                    startTxt.setVisibility(View.INVISIBLE);
-                    scheduled_start.setVisibility(View.VISIBLE);
-                    schedulingProgram.setText("ΗΜΕΡΟΜΗΝΙΑ ΚΑΙ ΩΡΑ");
-                    schedulingProgram.setBackgroundColor(Color.BLACK);
-                    Calendar mcurrentDate = Calendar.getInstance();
-                    int year = mcurrentDate.get(Calendar.YEAR);
-                    int month = mcurrentDate.get(Calendar.MONTH);
-                    int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
-
-
-                    DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
-                        public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
-                            // TODO Auto-generated method stub
-                            /*      Your code   to get date and time    */
-                            Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
-                            datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" +  selectedDay + "/" + selectedMonth + "/" + selectedYear);
+                    int time[];
+                    if (!normalb && !lightb && !strongb && !favorite.isChecked()) {
+                        if (voiceOn) {
+                            MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.select_program_to_start);
+                            music.start();
                         }
-                    }, year, month, day);
-                    mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-                    mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
-                    mDatePicker.show();
+                        Snackbar.make(view, "ΠΡΕΠΕΙ ΝΑ ΕΠΙΛΕΞΕΤΕ ΠΡΟΓΡΑΜΜΑ ΓΙΑ ΝΑ ΞΕΚΙΝΗΣΕΤΕ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    } else if (favorite.isChecked()) {
 
-                    mHour = mcurrentDate.get(Calendar.HOUR_OF_DAY);
-                    mMinute = mcurrentDate.get(Calendar.MINUTE);
+                        String text = "ΚΑΝΟΝΙΚΟ 15' ΘΕΡΜΟΚΡΑΣΙΑ 30 ΞΕΒΓΑΛΜΑ ΣΤΥΨΙΜΟ";
+                        int tot = 50;
+                        datePicker.setVisibility(View.VISIBLE);
+                        timePicker.setVisibility(View.VISIBLE);
+                        startTxt.setVisibility(View.INVISIBLE);
+                        scheduled_start.setVisibility(View.VISIBLE);
+                        cancel_scheduled.setVisibility(View.VISIBLE);
+                        Calendar mcurrentDate = Calendar.getInstance();
+                        int year = mcurrentDate.get(Calendar.YEAR);
+                        int month = mcurrentDate.get(Calendar.MONTH);
+                        int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
 
-                    TimePickerDialog timePickerDialog = new TimePickerDialog(FirstFragment.this,
-                            new TimePickerDialog.OnTimeSetListener() {
 
-                                @Override
-                                public void onTimeSet(TimePicker view, int hourOfDay,
-                                                      int minute) {
+                        DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
+                            public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
+                                // TODO Auto-generated method stub
+                                /*      Your code   to get date and time    */
+                                Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
+                                datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" + selectedDay + "/" + selectedMonth + "/" + selectedYear);
+                            }
+                        }, year, month, day);
+                        mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                        mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
+                        mDatePicker.show();
 
-                                    timePicker.setText("ΚΑΙ ΩΡΑ " + hourOfDay + ":" + minute);
+                        mHour = mcurrentDate.get(Calendar.HOUR_OF_DAY);
+                        mMinute = mcurrentDate.get(Calendar.MINUTE);
+
+                        TimePickerDialog timePickerDialog = new TimePickerDialog(FirstFragment.this,
+                                new TimePickerDialog.OnTimeSetListener() {
+
+                                    @SuppressLint("SetTextI18n")
+                                    @Override
+                                    public void onTimeSet(TimePicker view, int hourOfDay,
+                                                          int minute) {
+
+                                        timePicker.setText("ΚΑΙ ΩΡΑ " + hourOfDay + ":" + String.format("%02d", minute));
+                                    }
+                                }, mHour, mMinute, false);
+                        timePickerDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                            @Override
+                            public void onShow(DialogInterface dialog) {
+                                // This is hiding the "Cancel" button:
+                                timePickerDialog.getButton(Dialog.BUTTON_NEGATIVE).setVisibility(View.GONE);
+                            }
+                        });
+                        timePickerDialog.show();
+
+
+                        normalb = false;
+                        lightb = false;
+                        strongb = false;
+                        if (voiceOn) {
+                            MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.scheduling_date_time);
+                            music.start();
+                        }
+                    } else {
+                        if (normalb) {
+                            String text = "ΚΑΝΟΝΙΚΟ ";
+                            int tot = 15;
+                            text += spinnerTemperature.getSelectedItem().toString() + "'";
+                            if (extra1.isChecked()) {
+                                text += " ΣΤΥΨΙΜΟ";
+                                tot += 15;
+                            }
+                            if (extra2.isChecked()) {
+                                text += " ΞΕΒΓΑΛΜΑ";
+                                tot += 20;
+                            }
+                            datePicker.setVisibility(View.VISIBLE);
+                            timePicker.setVisibility(View.VISIBLE);
+                            startTxt.setVisibility(View.INVISIBLE);
+                            scheduled_start.setVisibility(View.VISIBLE);
+                            cancel_scheduled.setVisibility(View.VISIBLE);
+                            Calendar mcurrentDate = Calendar.getInstance();
+                            int year = mcurrentDate.get(Calendar.YEAR);
+                            int month = mcurrentDate.get(Calendar.MONTH);
+                            int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+
+
+                            DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
+                                public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
+                                    // TODO Auto-generated method stub
+                                    /*      Your code   to get date and time    */
+                                    Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
+                                    datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" + selectedDay + "/" + selectedMonth + "/" + selectedYear);
                                 }
-                            }, mHour, mMinute, false);
-                    timePickerDialog.show();
+                            }, year, month, day);
+                            mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                            mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
+                            mDatePicker.show();
 
-                    normalb = false;
-                    lightb = false;
-                    strongb = false;
-                    if (voiceOn) {
-                        MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.scheduling_date_time);
-                        music.start();
-                    }
-                }
-                else {
-                    if (normalb) {
-                        String text = "ΚΑΝΟΝΙΚΟ ";
-                        int tot = 15;
-                        text += spinnerTemperature.getSelectedItem().toString() + "'";
-                        if (extra1.isChecked()) {
-                            text += " ΣΤΥΨΙΜΟ";
-                            tot += 15;
-                        }
-                        if (extra2.isChecked()) {
-                            text += " ΞΕΒΓΑΛΜΑ";
-                            tot += 20;
-                        }
-                        datePicker.setVisibility(View.VISIBLE);
-                        timePicker.setVisibility(View.VISIBLE);
-                        startTxt.setVisibility(View.INVISIBLE);
-                        scheduled_start.setVisibility(View.VISIBLE);
-                        schedulingProgram.setText("ΗΜΕΡΟΜΗΝΙΑ ΚΑΙ ΩΡΑ");
-                        schedulingProgram.setBackgroundColor(Color.BLACK);
-                        Calendar mcurrentDate = Calendar.getInstance();
-                        int year = mcurrentDate.get(Calendar.YEAR);
-                        int month = mcurrentDate.get(Calendar.MONTH);
-                        int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+                            mHour = mcurrentDate.get(Calendar.HOUR_OF_DAY);
+                            mMinute = mcurrentDate.get(Calendar.MINUTE);
 
+                            TimePickerDialog timePickerDialog = new TimePickerDialog(FirstFragment.this,
+                                    new TimePickerDialog.OnTimeSetListener() {
 
-                        DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
-                            public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
-                                // TODO Auto-generated method stub
-                                /*      Your code   to get date and time    */
-                                Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
-                                datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" +  selectedDay + "/" + selectedMonth + "/" + selectedYear);
+                                        @Override
+                                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                                              int minute) {
+
+                                            timePicker.setText("ΚΑΙ ΩΡΑ " + hourOfDay + ":" + minute);
+                                        }
+                                    }, mHour, mMinute, false);
+                            timePickerDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                                @Override
+                                public void onShow(DialogInterface dialog) {
+                                    // This is hiding the "Cancel" button:
+                                    timePickerDialog.getButton(Dialog.BUTTON_NEGATIVE).setVisibility(View.GONE);
+                                }
+                            });
+                            timePickerDialog.show();
+
+                            normalb = false;
+                            lightb = false;
+                            strongb = false;
+                            if (voiceOn) {
+                                MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.scheduling_date_time);
+                                music.start();
                             }
-                        }, year, month, day);
-                        mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-                        mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
-                        mDatePicker.show();
-
-                        mHour = mcurrentDate.get(Calendar.HOUR_OF_DAY);
-                        mMinute = mcurrentDate.get(Calendar.MINUTE);
-
-                        TimePickerDialog timePickerDialog = new TimePickerDialog(FirstFragment.this,
-                                new TimePickerDialog.OnTimeSetListener() {
-
-                                    @Override
-                                    public void onTimeSet(TimePicker view, int hourOfDay,
-                                                          int minute) {
-
-                                        timePicker.setText("ΚΑΙ ΩΡΑ " + hourOfDay + ":" + minute);
-                                    }
-                                }, mHour, mMinute, false);
-                        timePickerDialog.show();
-
-                        normalb = false;
-                        lightb = false;
-                        strongb = false;
-                        if (voiceOn) {
-                            MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.scheduling_date_time);
-                            music.start();
-                        }
-                    }
-                    else if (lightb) {
-                        String text = "ΕΛΑΦΡΥ ";
-                        int tot = 60;
-                        text += spinnerTemperature.getSelectedItem().toString() + "'";
-                        if (extra1.isChecked()) {
-                            text += " ΣΤΥΨΙΜΟ";
-                            tot += 15;
-                        }
-                        if (extra2.isChecked()) {
-                            text += " ΞΕΒΓΑΛΜΑ";
-                            tot += 20;
-                        }
-
-                        datePicker.setVisibility(View.VISIBLE);
-                        timePicker.setVisibility(View.VISIBLE);
-                        startTxt.setVisibility(View.INVISIBLE);
-                        scheduled_start.setVisibility(View.VISIBLE);
-                        schedulingProgram.setText("ΗΜΕΡΟΜΗΝΙΑ ΚΑΙ ΩΡΑ");
-                        schedulingProgram.setBackgroundColor(Color.BLACK);
-                        Calendar mcurrentDate = Calendar.getInstance();
-                        int year = mcurrentDate.get(Calendar.YEAR);
-                        int month = mcurrentDate.get(Calendar.MONTH);
-                        int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
-
-
-                        DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
-                            public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
-                                // TODO Auto-generated method stub
-                                /*      Your code   to get date and time    */
-                                Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
-                                datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" +  selectedDay + "/" + selectedMonth + "/" + selectedYear);
+                        } else if (lightb) {
+                            String text = "ΕΛΑΦΡΥ ";
+                            int tot = 60;
+                            text += spinnerTemperature.getSelectedItem().toString() + "'";
+                            if (extra1.isChecked()) {
+                                text += " ΣΤΥΨΙΜΟ";
+                                tot += 15;
                             }
-                        }, year, month, day);
-                        mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-                        mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
-                        mDatePicker.show();
-
-                        mHour = mcurrentDate.get(Calendar.HOUR_OF_DAY);
-                        mMinute = mcurrentDate.get(Calendar.MINUTE);
-
-                        TimePickerDialog timePickerDialog = new TimePickerDialog(FirstFragment.this,
-                                new TimePickerDialog.OnTimeSetListener() {
-
-                                    @Override
-                                    public void onTimeSet(TimePicker view, int hourOfDay,
-                                                          int minute) {
-
-                                        timePicker.setText("ΚΑΙ ΩΡΑ " + hourOfDay + ":" + minute);
-                                    }
-                                }, mHour, mMinute, false);
-                        timePickerDialog.show();
-
-                        normalb = false;
-                        lightb = false;
-                        strongb = false;
-                        if (voiceOn) {
-                            MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.scheduling_date_time);
-                            music.start();
-                        }
-                    }
-                    else if (strongb) {
-                        String text = "ΙΣΧΥΡΟ ";
-                        int tot = 60;
-                        text += spinnerTemperature.getSelectedItem().toString() + "'";
-                        if (extra1.isChecked()) {
-                            text += " ΣΤΥΨΙΜΟ";
-                            tot += 15;
-                        }
-                        if (extra2.isChecked()) {
-                            text += " ΞΕΒΓΑΛΜΑ";
-                            tot += 20;
-                        }
-                        datePicker.setVisibility(View.VISIBLE);
-                        timePicker.setVisibility(View.VISIBLE);
-                        startTxt.setVisibility(View.INVISIBLE);
-                        scheduled_start.setVisibility(View.VISIBLE);
-                        schedulingProgram.setText("ΗΜΕΡΟΜΗΝΙΑ ΚΑΙ ΩΡΑ");
-                        schedulingProgram.setBackgroundColor(Color.BLACK);
-                        Calendar mcurrentDate = Calendar.getInstance();
-                        int year = mcurrentDate.get(Calendar.YEAR);
-                        int month = mcurrentDate.get(Calendar.MONTH);
-                        int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
-
-
-                        DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
-                            public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
-                                // TODO Auto-generated method stub
-                                /*      Your code   to get date and time    */
-                                Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
-                                datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" +  selectedDay + "/" + selectedMonth + "/" + selectedYear);
+                            if (extra2.isChecked()) {
+                                text += " ΞΕΒΓΑΛΜΑ";
+                                tot += 20;
                             }
-                        }, year, month, day);
-                        mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-                        mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
-                        mDatePicker.show();
 
-                        mHour = mcurrentDate.get(Calendar.HOUR_OF_DAY);
-                        mMinute = mcurrentDate.get(Calendar.MINUTE);
+                            datePicker.setVisibility(View.VISIBLE);
+                            timePicker.setVisibility(View.VISIBLE);
+                            startTxt.setVisibility(View.INVISIBLE);
+                            scheduled_start.setVisibility(View.VISIBLE);
+                            cancel_scheduled.setVisibility(View.VISIBLE);
+                            Calendar mcurrentDate = Calendar.getInstance();
+                            int year = mcurrentDate.get(Calendar.YEAR);
+                            int month = mcurrentDate.get(Calendar.MONTH);
+                            int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
 
-                        TimePickerDialog timePickerDialog = new TimePickerDialog(FirstFragment.this,
-                                new TimePickerDialog.OnTimeSetListener() {
 
-                                    @Override
-                                    public void onTimeSet(TimePicker view, int hourOfDay,
-                                                          int minute) {
+                            DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
+                                public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
+                                    // TODO Auto-generated method stub
+                                    /*      Your code   to get date and time    */
+                                    Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
+                                    datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" + selectedDay + "/" + selectedMonth + "/" + selectedYear);
+                                }
+                            }, year, month, day);
+                            mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                            mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
+                            mDatePicker.show();
 
-                                        timePicker.setText("ΚΑΙ ΩΡΑ " + hourOfDay + ":" + minute);
-                                    }
-                                }, mHour, mMinute, false);
-                        timePickerDialog.show();
+                            mHour = mcurrentDate.get(Calendar.HOUR_OF_DAY);
+                            mMinute = mcurrentDate.get(Calendar.MINUTE);
 
-                        normalb = false;
-                        lightb = false;
-                        strongb = false;
-                        if (voiceOn) {
-                            MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.scheduling_date_time);
-                            music.start();
+                            TimePickerDialog timePickerDialog = new TimePickerDialog(FirstFragment.this,
+                                    new TimePickerDialog.OnTimeSetListener() {
+
+                                        @Override
+                                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                                              int minute) {
+
+                                            timePicker.setText("ΚΑΙ ΩΡΑ " + hourOfDay + ":" + minute);
+                                        }
+                                    }, mHour, mMinute, false);
+                            timePickerDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                                @Override
+                                public void onShow(DialogInterface dialog) {
+                                    // This is hiding the "Cancel" button:
+                                    timePickerDialog.getButton(Dialog.BUTTON_NEGATIVE).setVisibility(View.GONE);
+                                }
+                            });
+                            timePickerDialog.show();
+
+                            normalb = false;
+                            lightb = false;
+                            strongb = false;
+                            if (voiceOn) {
+                                MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.scheduling_date_time);
+                                music.start();
+                            }
+                        } else if (strongb) {
+                            String text = "ΙΣΧΥΡΟ ";
+                            int tot = 60;
+                            text += spinnerTemperature.getSelectedItem().toString() + "'";
+                            if (extra1.isChecked()) {
+                                text += " ΣΤΥΨΙΜΟ";
+                                tot += 15;
+                            }
+                            if (extra2.isChecked()) {
+                                text += " ΞΕΒΓΑΛΜΑ";
+                                tot += 20;
+                            }
+                            datePicker.setVisibility(View.VISIBLE);
+                            timePicker.setVisibility(View.VISIBLE);
+                            startTxt.setVisibility(View.INVISIBLE);
+                            scheduled_start.setVisibility(View.VISIBLE);
+                            cancel_scheduled.setVisibility(View.VISIBLE);
+                            Calendar mcurrentDate = Calendar.getInstance();
+                            int year = mcurrentDate.get(Calendar.YEAR);
+                            int month = mcurrentDate.get(Calendar.MONTH);
+                            int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+
+
+                            DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
+                                public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
+                                    // TODO Auto-generated method stub
+                                    /*      Your code   to get date and time    */
+                                    Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
+                                    datePicker.setText("Η ΠΛΥΣΗ ΘΑ ΠΡΑΓΜΑΤΟΠΟΙΗΘΕΙ ΣΤΙΣ:" + selectedDay + "/" + selectedMonth + "/" + selectedYear);
+                                }
+                            }, year, month, day);
+                            mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                            mDatePicker.setTitle("ΕΠΙΛΕΞΤΕ ΗΜΕΡΟΜΗΝΙΑ");
+                            mDatePicker.show();
+
+                            mHour = mcurrentDate.get(Calendar.HOUR_OF_DAY);
+                            mMinute = mcurrentDate.get(Calendar.MINUTE);
+
+                            TimePickerDialog timePickerDialog = new TimePickerDialog(FirstFragment.this,
+                                    new TimePickerDialog.OnTimeSetListener() {
+
+                                        @Override
+                                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                                              int minute) {
+
+                                            timePicker.setText("ΚΑΙ ΩΡΑ " + hourOfDay + ":" + minute);
+                                        }
+                                    }, mHour, mMinute, false);
+                            timePickerDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                                @Override
+                                public void onShow(DialogInterface dialog) {
+                                    // This is hiding the "Cancel" button:
+                                    timePickerDialog.getButton(Dialog.BUTTON_NEGATIVE).setVisibility(View.GONE);
+                                }
+                            });
+
+                            timePickerDialog.show();
+
+                            normalb = false;
+                            lightb = false;
+                            strongb = false;
+                            if (voiceOn) {
+                                MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.scheduling_date_time);
+                                music.start();
+                            }
                         }
                     }
-                }
+
             }
 
+
+        });
+
+        cancel_scheduled.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (voiceOn) {
+                    MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.cancel_scheduled);
+                    music.start();
+                }
+                Snackbar.make(view, "Η ΠΡΟΓΡΑΜΜΑΤΙΣΜΕΝΗ ΠΛΥΣΗ ΑΚΥΡΩΘΗΚΕ", Snackbar.LENGTH_INDEFINITE).setAction("Action", null).show();
+                Intent intent = new Intent(FirstFragment.this, FirstFragment.class);
+                startActivity(intent);
+            }
         });
 
         scheduled_start.setOnClickListener(new View.OnClickListener() {

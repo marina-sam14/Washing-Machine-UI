@@ -45,6 +45,11 @@ public class Completed extends AppCompatActivity {
         Button home_page = (Button) findViewById(R.id.home_page);
         Button door = (Button) findViewById(R.id.door);
 
+        if (voiceOn){
+            MediaPlayer music = MediaPlayer.create(Completed.this, R.raw.completed);
+            music.start();
+        }
+
         home_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
