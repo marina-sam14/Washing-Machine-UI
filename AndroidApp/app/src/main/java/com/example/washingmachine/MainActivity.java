@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
     boolean voiceOn;
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -44,11 +43,12 @@ public class MainActivity extends AppCompatActivity {
         TextView date = findViewById(R.id.date);
 
         if (voiceOn) {
-            voice.setImageDrawable(getDrawable(R.drawable.ic_baseline_hearing_disabled_24));
+            voice.setImageDrawable(getDrawable(R.drawable.ic_baseline_voice_over_off_24));
         } else {
-            voice.setImageDrawable(getDrawable(R.drawable.ic_baseline_hearing_24));
+            voice.setImageDrawable(getDrawable(R.drawable.ic_baseline_record_voice_over_24));
         }
 
+        // Button for enabling voice commands //
         voice.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("UseCompatLoadingForDrawables")
             @Override
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                         music.start();
                     }
                     Snackbar.make(view, "ΕΝΕΡΓΟΠΟΙΗΣΑΤΕ ΤΗΝ ΦΩΝΗΤΙΚΗ ΥΠΟΒΟΗΘΗΣΗ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                    voice.setImageDrawable(getDrawable(R.drawable.ic_baseline_hearing_disabled_24));
+                    voice.setImageDrawable(getDrawable(R.drawable.ic_baseline_voice_over_off_24));
                 } else {
                     if (voiceOn) {
                         MediaPlayer music = MediaPlayer.create(MainActivity.this, R.raw.disabled_voice_help);
@@ -68,12 +68,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                     voiceOn = false;
                     Snackbar.make(view, "ΑΠΕΝΕΡΓΟΠΟΙΗΣΑΤΕ ΤΗΝ ΦΩΝΗΤΙΚΗ ΥΠΟΒΟΗΘΗΣΗ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                    voice.setImageDrawable(getDrawable(R.drawable.ic_baseline_hearing_24));
+                    voice.setImageDrawable(getDrawable(R.drawable.ic_baseline_record_voice_over_24));
                 }
             }
         });
 
 
+        // Button to go to the programs //
         programs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -51,29 +51,31 @@ public class FirstFragment extends AppCompatActivity {
 
         voiceOn = getIntent().getBooleanExtra("VOICE_ON", false);
 
-        Spinner spinnerTemperature = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.languages, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        Spinner spinnerTemperature = findViewById(R.id.spinner);
+        String[] list = {"30 °C", "40 °C", "50 °C", "60 °C"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, list);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinnerTemperature.setPrompt("ΕΠΙΛΟΓΗ ΘΕΡΜΟΚΡΑΣΙΑΣ");
         spinnerTemperature.setAdapter(adapter);
 
-        RadioButton normal = (RadioButton) findViewById(R.id.radio_normal);
-        RadioButton light = (RadioButton) findViewById(R.id.radio_light);
-        RadioButton strong = (RadioButton) findViewById(R.id.radio_strong);
+        RadioButton normal = findViewById(R.id.radio_normal);
+        RadioButton light = findViewById(R.id.radio_light);
+        RadioButton strong = findViewById(R.id.radio_strong);
 
-        CheckBox favorite = (CheckBox) findViewById(R.id.btnfav);
+        CheckBox favorite = findViewById(R.id.btnfav);
 
-        CheckBox extra1 = (CheckBox) findViewById(R.id.drybtn);
-        CheckBox extra2 = (CheckBox) findViewById(R.id.washbtn);
+        CheckBox extra1 = findViewById(R.id.drybtn);
+        CheckBox extra2 = findViewById(R.id.washbtn);
 
-        ImageButton start = (ImageButton) findViewById(R.id.nextbtn);
+        ImageButton start = findViewById(R.id.nextbtn);
         start.setVisibility(View.VISIBLE);
-        TextView startTxt = (TextView) findViewById(R.id.next);
-        ImageButton helper = (ImageButton) findViewById(R.id.helper);
+        TextView startTxt = findViewById(R.id.next);
+        ImageButton helper = findViewById(R.id.helper);
 
-        Button schedulingProgram = (Button) findViewById(R.id.scheduled);
-        TextView datePicker = (TextView) findViewById(R.id.datePicker);
-        TextView timePicker = (TextView) findViewById(R.id.timePicker);
-        TextView scheduled_start = (TextView) findViewById(R.id.scheduled_next);
+        Button schedulingProgram = findViewById(R.id.scheduled);
+        TextView datePicker = findViewById(R.id.datePicker);
+        TextView timePicker = findViewById(R.id.timePicker);
+        TextView scheduled_start = findViewById(R.id.scheduled_next);
         datePicker.setVisibility(View.INVISIBLE);
         timePicker.setVisibility(View.INVISIBLE);
         scheduled_start.setVisibility(View.INVISIBLE);

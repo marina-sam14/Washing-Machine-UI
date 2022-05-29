@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#848ccf "
-        android:src="@drawable/ic_baseline_hearing_24"
+        android:src="@drawable/ic_baseline_record_voice_over_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/door"
