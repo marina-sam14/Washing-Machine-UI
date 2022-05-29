@@ -290,120 +290,12 @@ public class FirstFragment extends AppCompatActivity {
             }
         });
 
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!normalb && !lightb && !strongb && !favorite.isChecked()) {
-                    if (voiceOn) {
-                        MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.select_program_to_start);
-                        music.start();
-                    }
-                    Snackbar.make(view, "ΠΡΕΠΕΙ ΝΑ ΕΠΙΛΕΞΕΤΕ ΠΡΟΓΡΑΜΜΑ ΓΙΑ ΝΑ ΞΕΚΙΝΗΣΕΤΕ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                }else if (pressedSchedule){
-                    if (voiceOn) {
-                        MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.successfully_scheduling);
-                        music.start();
-                    }
-                    Snackbar.make(view, "Η ΠΛΥΣΗ ΣΑΣ ΠΡΟΓΡΑΜΜΑΤΙΣΤΗΚΕ ΜΕ ΕΠΙΤΥΧΙΑ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-
-                }
-                else if (favorite.isChecked()) {
-                    String text = "ΚΑΝΟΝΙΚΟ 15' ΘΕΡΜΟΚΡΑΣΙΑ 30 ΞΕΒΓΑΛΜΑ ΣΤΥΨΙΜΟ";
-                    int tot = 50;
-                    Intent intent = new Intent(FirstFragment.this, Washing.class);
-                    intent.putExtra("WASH_TEXT", text);
-                    intent.putExtra("TOTAL_TIME", tot);
-                    normalb = false;
-                    lightb = false;
-                    strongb = false;
-                    if (voiceOn) {
-                        MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.starting_program);
-                        music.start();
-                    }
-                    intent.putExtra("VOICE_ON", voiceOn);
-                    startActivity(intent);
-                } else {
-                    if (normalb) {
-                        String text = "ΚΑΝΟΝΙΚΟ ";
-                        int tot = 15;
-                        text += spinnerTemperature.getSelectedItem().toString() + "'";
-                        if (extra1.isChecked()) {
-                            text += " ΣΤΥΨΙΜΟ";
-                            tot += 15;
-                        }
-                        if (extra2.isChecked()) {
-                            text += " ΞΕΒΓΑΛΜΑ";
-                            tot += 20;
-                        }
-                        Intent intent = new Intent(FirstFragment.this, Washing.class);
-                        intent.putExtra("WASH_TEXT", text);
-                        intent.putExtra("TOTAL_TIME", tot);
-                        normalb = false;
-                        lightb = false;
-                        strongb = false;
-                        if (voiceOn) {
-                            MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.starting_program);
-                            music.start();
-                        }
-                        intent.putExtra("VOICE_ON", voiceOn);
-                        startActivity(intent);
-                    } else if (lightb) {
-                        String text = "ΕΛΑΦΡΥ ";
-                        int tot = 60;
-                        text += spinnerTemperature.getSelectedItem().toString() + "'";
-                        if (extra1.isChecked()) {
-                            text += " ΣΤΥΨΙΜΟ";
-                            tot += 15;
-                        }
-                        if (extra2.isChecked()) {
-                            text += " ΞΕΒΓΑΛΜΑ";
-                            tot += 20;
-                        }
-                        Intent intent = new Intent(FirstFragment.this, Washing.class);
-                        intent.putExtra("WASH_TEXT", text);
-                        intent.putExtra("TOTAL_TIME", tot);
-                        normalb = false;
-                        lightb = false;
-                        strongb = false;
-                        if (voiceOn) {
-                            MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.starting_program);
-                            music.start();
-                        }
-                        intent.putExtra("VOICE_ON", voiceOn);
-                        startActivity(intent);
-                    } else if (strongb) {
-                        String text = "ΙΣΧΥΡΟ ";
-                        int tot = 60;
-                        text += spinnerTemperature.getSelectedItem().toString() + "'";
-                        if (extra1.isChecked()) {
-                            text += " ΣΤΥΨΙΜΟ";
-                            tot += 15;
-                        }
-                        if (extra2.isChecked()) {
-                            text += " ΞΕΒΓΑΛΜΑ";
-                            tot += 20;
-                        }
-                        Intent intent = new Intent(FirstFragment.this, Washing.class);
-                        intent.putExtra("WASH_TEXT", text);
-                        intent.putExtra("TOTAL_TIME", tot);
-                        normalb = false;
-                        lightb = false;
-                        strongb = false;
-                        if (voiceOn) {
-                            MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.starting_program);
-                            music.start();
-                        }
-                        intent.putExtra("VOICE_ON", voiceOn);
-                        startActivity(intent);
-                    }
-                }
-            }
-        });
 
 
         schedulingProgram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                pressedSchedule=true;
                     int time[];
                     if (!normalb && !lightb && !strongb && !favorite.isChecked()) {
                         if (voiceOn) {
@@ -693,11 +585,122 @@ public class FirstFragment extends AppCompatActivity {
                     music.start();
                 }
                 Snackbar.make(view, "Η ΠΛΥΣΗ ΣΑΣ ΠΡΟΓΡΑΜΜΑΤΙΣΤΗΚΕ ΜΕ ΕΠΙΤΥΧΙΑ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                Intent intent = new Intent(FirstFragment.this, MainActivity.class);
-                intent.putExtra("VOICE_ON", voiceOn);
-                startActivity(intent);
+//                Intent intent = new Intent(FirstFragment.this, MainActivity.class);
+//                intent.putExtra("VOICE_ON", voiceOn);
+//                startActivity(intent);
             }
         });
+
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!normalb && !lightb && !strongb && !favorite.isChecked()) {
+                    if (voiceOn) {
+                        MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.select_program_to_start);
+                        music.start();
+                    }
+                    Snackbar.make(view, "ΠΡΕΠΕΙ ΝΑ ΕΠΙΛΕΞΕΤΕ ΠΡΟΓΡΑΜΜΑ ΓΙΑ ΝΑ ΞΕΚΙΝΗΣΕΤΕ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                }else if (pressedSchedule){
+                    if (voiceOn) {
+                        MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.successfully_scheduling);
+                        music.start();
+                    }
+                    Snackbar.make(view, "Η ΠΛΥΣΗ ΣΑΣ ΠΡΟΓΡΑΜΜΑΤΙΣΤΗΚΕ ΜΕ ΕΠΙΤΥΧΙΑ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
+                }
+                else if (favorite.isChecked()) {
+                    String text = "ΚΑΝΟΝΙΚΟ 15' ΘΕΡΜΟΚΡΑΣΙΑ 30 ΞΕΒΓΑΛΜΑ ΣΤΥΨΙΜΟ";
+                    int tot = 50;
+                    Intent intent = new Intent(FirstFragment.this, Washing.class);
+                    intent.putExtra("WASH_TEXT", text);
+                    intent.putExtra("TOTAL_TIME", tot);
+                    normalb = false;
+                    lightb = false;
+                    strongb = false;
+                    if (voiceOn) {
+                        MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.starting_program);
+                        music.start();
+                    }
+                    intent.putExtra("VOICE_ON", voiceOn);
+                    startActivity(intent);
+                } else {
+                    if (normalb) {
+                        String text = "ΚΑΝΟΝΙΚΟ ";
+                        int tot = 15;
+                        text += spinnerTemperature.getSelectedItem().toString() + "'";
+                        if (extra1.isChecked()) {
+                            text += " ΣΤΥΨΙΜΟ";
+                            tot += 15;
+                        }
+                        if (extra2.isChecked()) {
+                            text += " ΞΕΒΓΑΛΜΑ";
+                            tot += 20;
+                        }
+                        Intent intent = new Intent(FirstFragment.this, Washing.class);
+                        intent.putExtra("WASH_TEXT", text);
+                        intent.putExtra("TOTAL_TIME", tot);
+                        normalb = false;
+                        lightb = false;
+                        strongb = false;
+                        if (voiceOn) {
+                            MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.starting_program);
+                            music.start();
+                        }
+                        intent.putExtra("VOICE_ON", voiceOn);
+                        startActivity(intent);
+                    } else if (lightb) {
+                        String text = "ΕΛΑΦΡΥ ";
+                        int tot = 60;
+                        text += spinnerTemperature.getSelectedItem().toString() + "'";
+                        if (extra1.isChecked()) {
+                            text += " ΣΤΥΨΙΜΟ";
+                            tot += 15;
+                        }
+                        if (extra2.isChecked()) {
+                            text += " ΞΕΒΓΑΛΜΑ";
+                            tot += 20;
+                        }
+                        Intent intent = new Intent(FirstFragment.this, Washing.class);
+                        intent.putExtra("WASH_TEXT", text);
+                        intent.putExtra("TOTAL_TIME", tot);
+                        normalb = false;
+                        lightb = false;
+                        strongb = false;
+                        if (voiceOn) {
+                            MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.starting_program);
+                            music.start();
+                        }
+                        intent.putExtra("VOICE_ON", voiceOn);
+                        startActivity(intent);
+                    } else if (strongb) {
+                        String text = "ΙΣΧΥΡΟ ";
+                        int tot = 60;
+                        text += spinnerTemperature.getSelectedItem().toString() + "'";
+                        if (extra1.isChecked()) {
+                            text += " ΣΤΥΨΙΜΟ";
+                            tot += 15;
+                        }
+                        if (extra2.isChecked()) {
+                            text += " ΞΕΒΓΑΛΜΑ";
+                            tot += 20;
+                        }
+                        Intent intent = new Intent(FirstFragment.this, Washing.class);
+                        intent.putExtra("WASH_TEXT", text);
+                        intent.putExtra("TOTAL_TIME", tot);
+                        normalb = false;
+                        lightb = false;
+                        strongb = false;
+                        if (voiceOn) {
+                            MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.starting_program);
+                            music.start();
+                        }
+                        intent.putExtra("VOICE_ON", voiceOn);
+                        startActivity(intent);
+                    }
+                }
+            }
+        });
+
     }
 
     public void onRadioButtonClicked(View view) {

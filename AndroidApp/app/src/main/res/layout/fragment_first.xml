@@ -390,7 +390,8 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.784"
-            app:srcCompat="@drawable/ic_next" />
+            app:srcCompat="@drawable/ic_next"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
             android:id="@+id/homepage"
@@ -404,7 +405,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.727"
-            app:srcCompat="@drawable/ic_home" />
+            app:srcCompat="@drawable/ic_home"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/scheduled"
