@@ -43,8 +43,10 @@ We used the Nexus 9 Emulator for Android 6.0 and newer and as for the API, we us
 ![Settings](images/settings.png)
 
 ## Voice help on
+Pressing the icon without the bar, turns on the feature
 ![On](images/on.png)
 
 ## Voice help off
+Pressing the icon with the bar, turns off the feature
 ![Off](images/off.png)
 
