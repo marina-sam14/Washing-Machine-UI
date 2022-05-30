@@ -43,5 +43,5 @@ We used the Nexus 9 Emulator for Android 6.0 and newer and as for the API, we us
 ![Settings](images/settings.png)
 
 ## Voice helper on and off -- gif
-![](https://github.com/marina-sam14/Washing-Machine-UI/blob/main/images/voice_helper.gif)
+![](https://github.com/marina-sam14/Washing-Machine-UI/blob/main/images/voice_helper_GIF.gif)
 
