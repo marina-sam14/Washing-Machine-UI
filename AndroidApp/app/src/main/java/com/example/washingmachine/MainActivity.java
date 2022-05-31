@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton voice = findViewById(R.id.voice);
         TextView date = findViewById(R.id.date);
 
-//        if voiceOn=true, then the icon without the line
+        //if voiceOn = true, then the icon without the line
         if (voiceOn) {
             voice.setImageDrawable(getDrawable(R.drawable.ic_baseline_voice_over_off_24));
         } else {

@@ -32,7 +32,6 @@ public class Washing extends AppCompatActivity {
     boolean pressedContinue = false;
     boolean voiceOn;
 
-
     protected void onCreate(Bundle savedInstanceState) {
 
         // Window without namebar
@@ -47,7 +46,7 @@ public class Washing extends AppCompatActivity {
         status = getIntent().getIntExtra("TOTAL_PROGRESS", 5);
         voiceOn = getIntent().getBooleanExtra("VOICE_ON", false);
 
-//        TextView with user's program choices
+        // TextView with user's program choices
         TextView workTxt = (TextView) findViewById(R.id.working);
         TextView info = (TextView) findViewById(R.id.info);
         info.setText(text);
@@ -56,7 +55,7 @@ public class Washing extends AppCompatActivity {
         String finalTxt = "ΕΚΤΙΜΩΜΕΝΟΣ ΧΡΟΝΟΣ ΟΛΟΚΛΗΡΩΣΗΣ: " + tot + "'";
         estimate.setText(finalTxt);
 
-        //        Setting date and time in the divider
+        // Setting date and time in the divider
         TextView date = findViewById(R.id.date);
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -113,7 +112,7 @@ public class Washing extends AppCompatActivity {
             }
         });
 
-//        Canceling washing
+        // Canceling washing
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,17 +122,16 @@ public class Washing extends AppCompatActivity {
                     music.start();
                 }
                 Intent intent = new Intent(Washing.this, PopUpCanceling.class);
-//                We want to save the progress bar's position to send it to PopUpCanceling fragment because if the user chooses to return in this fragment, the position must be the same
+                // We want to save the progress bar's position to send it to PopUpCanceling fragment because if the user chooses to return in this fragment, the position must be the same
                 intent.putExtra("TOTAL_TIME", tot);
+                intent.putExtra("WASH_TEXT", text);
                 intent.putExtra("TOTAL_PROGRESS", progressBar.getProgress());
                 intent.putExtra("VOICE_ON", voiceOn);
                 startActivity(intent);
             }
         });
 
-
-
-//        The progress bar's status runs as a thread until is equal to 100
+        // The progress bar's status runs as a thread until is equal to 100
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -163,7 +161,7 @@ public class Washing extends AppCompatActivity {
     }
 
     @Override
-//    We cannot use the back button that Android offers
+    // We shouldn't use the back button that Android offers
     public void onBackPressed() {
         // Do Here what ever you want do on back press;
     }

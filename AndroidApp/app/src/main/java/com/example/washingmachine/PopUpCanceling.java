@@ -33,7 +33,8 @@ public class PopUpCanceling extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.popup_cancel);
 
-//        Receiving variables from the Washing class, time,wash text and voice message
+        // Receiving variables from the Washing class, time,wash text and voice message
+        String text = getIntent().getStringExtra("WASH_TEXT");
         voiceOn = getIntent().getBooleanExtra("VOICE_ON", false);
         int tot = getIntent().getIntExtra("TOTAL_TIME", 42);
         int status = getIntent().getIntExtra("TOTAL_PROGRESS", 5);
@@ -54,7 +55,7 @@ public class PopUpCanceling extends AppCompatActivity {
         String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
         clock.setText(currentTime);
 
-//        Back to washing fragment button
+        // Back to washing fragment button
         continued.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,8 +72,9 @@ public class PopUpCanceling extends AppCompatActivity {
                         music.start();
                     }
                     Intent intent = new Intent(PopUpCanceling.this, Washing.class);
-//                    When we return to previous fragment, time and progress bar should be in the same spot as it was before
+                    // When we return to previous fragment, time and progress bar should be in the same spot as it was before
                     intent.putExtra("TOTAL_TIME", tot);
+                    intent.putExtra("WASH_TEXT", text);
                     intent.putExtra("TOTAL_PROGRESS", status);
                     intent.putExtra("VOICE_ON", voiceOn);
                     startActivity(intent);
@@ -80,11 +82,11 @@ public class PopUpCanceling extends AppCompatActivity {
             }
         });
 
-//        Canceling washing
+        // Canceling washing
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Button for the door to be opened
+                // Button for the door to be opened
                 if (openexists) {
                     if (voiceOn) {
                         MediaPlayer music = MediaPlayer.create(PopUpCanceling.this, R.raw.opening_door);

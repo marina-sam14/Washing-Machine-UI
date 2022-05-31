@@ -20,6 +20,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -41,7 +42,7 @@ public class FirstFragment extends AppCompatActivity {
     boolean lightb = false;
     boolean strongb = false;
     boolean pressedSchedule = false;
-    int mselectedDay, mselectedMonth, mselectedYear, mHour, mMinute, myHour, myMinute;
+    int mHour, mMinute;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class FirstFragment extends AppCompatActivity {
 
         voiceOn = getIntent().getBooleanExtra("VOICE_ON", false);
 
-//        Temperature degrees spinner
+        // Temperature degrees spinner
         Spinner spinnerTemperature = findViewById(R.id.spinner);
         String[] list = {"30 °C", "40 °C", "60 °C", "90 °C"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, list);
@@ -70,23 +71,28 @@ public class FirstFragment extends AppCompatActivity {
         CheckBox extra1 = findViewById(R.id.drybtn);
         CheckBox extra2 = findViewById(R.id.washbtn);
 
-//        Starting arrow image, visible when scheduling laundering is not enable
+        RadioGroup group = findViewById(R.id.group);
+
+        // Starting arrow image, visible when scheduling laundering is not enable
         ImageButton start = findViewById(R.id.nextbtn);
         start.setVisibility(View.VISIBLE);
-//        Next step text
+
+        // Next step text
         TextView startTxt = findViewById(R.id.next);
 
-//        Question mark image
+        // Question mark image
         ImageButton helper = findViewById(R.id.helper);
 
-//        Setting Scheduling laundering
+        // Setting Scheduling laundering
         Button schedulingProgram = findViewById(R.id.scheduled);
         TextView datePicker = findViewById(R.id.datePicker);
         TextView timePicker = findViewById(R.id.timePicker);
-//        Next step in Scheduling program
+
+        // Next step in Scheduling program
         TextView scheduled_start = findViewById(R.id.scheduled_next);
         TextView cancel_scheduled = findViewById(R.id.cancel_schedule);
-//        scheduling stuff is invisible by default until user decides to enable the feature
+
+        // Scheduling stuff is invisible by default until user decides to enable the feature
         datePicker.setVisibility(View.INVISIBLE);
         timePicker.setVisibility(View.INVISIBLE);
         scheduled_start.setVisibility(View.INVISIBLE);
@@ -102,7 +108,7 @@ public class FirstFragment extends AppCompatActivity {
         String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
         clock.setText(currentTime);
 
-        // back to home page
+        // Back to home page
         ImageButton home = (ImageButton) findViewById(R.id.homepage);
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +123,7 @@ public class FirstFragment extends AppCompatActivity {
             }
         });
 
-//        favourite program is checked
+        // Favourite program is checked
         favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,23 +135,32 @@ public class FirstFragment extends AppCompatActivity {
                 // Check which checkbox was clicked
                 if (checked) {
                     Snackbar.make(v, "ΕΧΕΤΕ ΕΠΙΛΕΞΕΙ ΤΟ ΑΓΑΠΗΜΕΝΟ ΣΑΣ ΠΡΟΓΡΑΜΜΑ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-//                    when favourite is checked, all the other choices are not available
+
+                    // When favourite is checked, all the other choices are not available
                     normal.setEnabled(false);
                     light.setEnabled(false);
                     strong.setEnabled(false);
                     extra1.setEnabled(false);
                     extra2.setEnabled(false);
-//                    other programs are disabled
+
+                    group.clearCheck();
+                    extra1.setChecked(false);
+                    extra2.setChecked(false);
+
+                    // Other programs are disabled
                     normalb = false;
                     lightb = false;
                     strongb = false;
                 } else {
-//                    if favourite is not checked, other choices are available
+
+                    // If favourite is not checked, other choices are available
                     normal.setEnabled(true);
                     light.setEnabled(true);
                     strong.setEnabled(true);
                     extra1.setEnabled(true);
                     extra2.setEnabled(true);
+
+                    group.clearCheck();
                     normalb = false;
                     lightb = false;
                     strongb = false;
@@ -153,7 +168,7 @@ public class FirstFragment extends AppCompatActivity {
             }
         });
 
-//        dry option is selected
+        // Dry option is selected
         extra1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,7 +184,7 @@ public class FirstFragment extends AppCompatActivity {
             }
         });
 
-//        extra wash option is checked
+        // Extra wash option is checked
         extra2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -185,7 +200,7 @@ public class FirstFragment extends AppCompatActivity {
             }
         });
 
-//        helper is pressed
+        // Helper is pressed
         helper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -199,19 +214,18 @@ public class FirstFragment extends AppCompatActivity {
             }
         });
 
-
-//      starttxt is equal to next when Scheduling laundering is not checked
+        // Starttxt is equal to next when Scheduling laundering is not checked
         startTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//               User has to choose a program for the laundering to start, otherwise a message warns them to choose one
+                // User has to choose a program for the laundering to start, otherwise a message warns them to choose one
                 if (!normalb && !lightb && !strongb && !favorite.isChecked()) {
                     if (voiceOn) {
                         MediaPlayer music = MediaPlayer.create(FirstFragment.this, R.raw.select_program_to_start);
                         music.start();
                     }
                     Snackbar.make(view, "ΠΡΕΠΕΙ ΝΑ ΕΠΙΛΕΞΕΤΕ ΠΡΟΓΡΑΜΜΑ ΓΙΑ ΝΑ ΞΕΚΙΝΗΣΕΤΕ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-//               favourite program is checked
+                    // Favourite program is checked
                 } else if (favorite.isChecked()) {
                     String text = "ΚΑΝΟΝΙΚΟ 15' ΘΕΡΜΟΚΡΑΣΙΑ 30 ΞΕΒΓΑΛΜΑ ΣΤΥΨΙΜΟ";
                     int tot = 50;
@@ -229,13 +243,13 @@ public class FirstFragment extends AppCompatActivity {
                     intent.putExtra("VOICE_ON", voiceOn);
                     startActivity(intent);
                 } else {
-//                    Normal program is checked
+                    // Normal program is checked
                     if (normalb) {
                         String text = "ΚΑΝΟΝΙΚΟ ";
                         int tot = 15;
-//                        Adding temperature degrees to the textview
+                        // Adding temperature degrees to the textview
                         text += spinnerTemperature.getSelectedItem().toString() + "'";
-//                        adding extra options to laundering and return the sum of the time duration of each choice
+                        // Adding extra options to laundering and return the sum of the time duration of each choice
                         if (extra1.isChecked()) {
                             text += " ΣΤΥΨΙΜΟ";
                             tot += 15;
@@ -318,8 +332,7 @@ public class FirstFragment extends AppCompatActivity {
             }
         });
 
-
-//      button for setting time and date to schedule the laundering
+        // Button for setting time and date to schedule the laundering
         schedulingProgram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -628,7 +641,7 @@ public class FirstFragment extends AppCompatActivity {
 
         });
 
-//        Button for cancelling the scheduling laundering, visible only in scheduling mode
+        // Button for cancelling the scheduling laundering, visible only in scheduling mode
         cancel_scheduled.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -643,7 +656,7 @@ public class FirstFragment extends AppCompatActivity {
             }
         });
 
-//        Scheduled start button, visible only in scheduling mode
+        // Scheduled start button, visible only in scheduling mode
         scheduled_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -659,7 +672,7 @@ public class FirstFragment extends AppCompatActivity {
             }
         });
 
-//        Starting laundering
+        // Starting laundering
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -788,7 +801,7 @@ public class FirstFragment extends AppCompatActivity {
 
     }
 
-//   Function where the appropriate sound is sounded based on what program is selected
+    //  Function where the appropriate sound is played based on what program is selected
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
@@ -828,8 +841,7 @@ public class FirstFragment extends AppCompatActivity {
         }
     }
 
-
-//  We cannot use the back button that Android offers
+    //  We shouldn't use the back button that Android offers
     @Override
     public void onBackPressed() {
         // Do Here what ever you want do on back press;
