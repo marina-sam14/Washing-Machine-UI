@@ -65,6 +65,7 @@ public class PopUpCanceling extends AppCompatActivity {
                         music.start();
                     }
                     Intent intent = new Intent(PopUpCanceling.this, MainActivity.class);
+                    intent.putExtra("VOICE_ON", voiceOn);
                     startActivity(intent);
                 } else {
                     if (voiceOn) {
