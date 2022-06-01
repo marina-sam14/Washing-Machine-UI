@@ -104,7 +104,7 @@ public class Washing extends AppCompatActivity {
                     workTxt.setText(content);
                     estimate.setText("ΕΚΤΙΜΩΜΕΝΟΣ ΧΡΟΝΟΣ ΟΛΟΚΛΗΡΩΣΗΣ: ΠΑΥΣΗ");
                     pauseBtn.setText("ΣΥΝΕΧΙΣΗ ΠΛΥΣΗΣ");
-                    progressBar.setVisibility(View.INVISIBLE);
+//                    progressBar.setVisibility(View.INVISIBLE);
                     pauseBtn.setBackgroundColor(Color.parseColor("#05be70"));
 //                    We want to press the button many times that's why we set paused as true
                     paused = true;
