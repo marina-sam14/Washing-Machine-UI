@@ -3,6 +3,7 @@
 In this University project, we had to create an app to help people to use the washing machine called UNITED UWM-5010 much easier. The app is created for people who know the Greek language.
 
 Our project follows the [Spiral model](https://en.wikipedia.org/wiki/Spiral_model).
+[Youtube Video Link] (https://youtu.be/egalI1cXn8c)
 
 In the first cycle, we created some mocks using [Justinmind](https://www.justinmind.com) to give an idea about how the app should look in the future. We created questionnaires in order to ask for feedback.
 We also used interviews in order to figure out how useful our interfaces are.
