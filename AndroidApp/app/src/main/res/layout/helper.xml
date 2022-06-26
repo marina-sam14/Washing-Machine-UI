@@ -30,12 +30,13 @@
         android:id="@+id/exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider"
-        app:layout_constraintRight_toLeftOf="@id/imageView5"
         android:layout_marginTop="70dp"
         android:backgroundTint="#848ccf "
-        app:srcCompat="@drawable/exit" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/imageView5"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:srcCompat="@drawable/exit"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
         android:id="@+id/imageView5"
