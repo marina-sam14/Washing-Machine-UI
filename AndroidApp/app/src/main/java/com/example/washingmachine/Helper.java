@@ -40,4 +40,9 @@ public class Helper extends AppCompatActivity {
             }
         });
     }
+
+    //    We cannot use the back button that Android offers
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+    }
 }

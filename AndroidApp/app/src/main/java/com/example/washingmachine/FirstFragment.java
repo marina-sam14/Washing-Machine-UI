@@ -24,6 +24,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -366,7 +367,10 @@ public class FirstFragment extends AppCompatActivity {
 
 
                         DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
+                            @SuppressLint("SetTextI18n")
                             public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
+//                                Months start from 0 so we add 1
+                                selectedMonth+=1;
                                 // TODO Auto-generated method stub
                                 /*      Your code   to get date and time    */
                                 Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
@@ -383,15 +387,24 @@ public class FirstFragment extends AppCompatActivity {
                         mMinute = mcurrentDate.get(Calendar.MINUTE);
                         TimePickerDialog timePickerDialog = new TimePickerDialog(FirstFragment.this,
                                 new TimePickerDialog.OnTimeSetListener() {
-
-                                    @SuppressLint("SetTextI18n")
                                     @Override
                                     public void onTimeSet(TimePicker view, int hourOfDay,
                                                           int minute) {
 
                                         timePicker.setText("ΚΑΙ ΩΡΑ " + hourOfDay + ":" + String.format("%02d", minute));
+//                                        if (hourOfDay < mHour || minute < mMinute){
+//                                            Toast.makeText(FirstFragment.this,
+//                                                    "ΔΕΝ ΜΠΟΡΕΙΤΕ ΝΑ ΕΠΙΛΕΞΕΤΕ ΠΕΡΑΣΜΕΝΗ ΩΡΑ",
+//                                                    Toast.LENGTH_LONG).show();
+//                                        }
                                     }
                                 }, mHour, mMinute, false);
+
+
+
+
+
+
 //                        We had to hide the cancel button in order to make sure that the user will not be able to skip the TimePicker choice
                         timePickerDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                             @Override
@@ -440,6 +453,7 @@ public class FirstFragment extends AppCompatActivity {
 
                             DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
                                 public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
+                                    selectedMonth+=1;
                                     // TODO Auto-generated method stub
                                     /*      Your code   to get date and time    */
                                     Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
@@ -515,6 +529,7 @@ public class FirstFragment extends AppCompatActivity {
 
                             DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
                                 public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
+                                    selectedMonth+=1;
                                     // TODO Auto-generated method stub
                                     /*      Your code   to get date and time    */
                                     Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
@@ -589,6 +604,7 @@ public class FirstFragment extends AppCompatActivity {
 
                             DatePickerDialog mDatePicker = new DatePickerDialog(FirstFragment.this, new DatePickerDialog.OnDateSetListener() {
                                 public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
+                                    selectedMonth+=1;
                                     // TODO Auto-generated method stub
                                     /*      Your code   to get date and time    */
                                     Log.e("ΕΠΙΛΕΞΑΤΕ ", selectedDay + "/ " + selectedMonth + " / " + selectedYear);
